@@ -1555,7 +1555,9 @@ ol {
 }
 
 .footer-left .footer-logo {
-  margin-bottom: 24px;
+  margin-bottom: 24px; 
+  max-width: 150px;
+
 }
 
 .footer-left .footer-logo a {
@@ -1565,7 +1567,7 @@ ol {
 .footer-left ul li {
   list-style: none;
   color: #b2b2b2;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 30px;
 }
 
