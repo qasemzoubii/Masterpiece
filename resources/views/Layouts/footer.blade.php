@@ -5,7 +5,7 @@
           <div class="col-lg-3">
             <div class="footer-left">
               <div class="footer-logo">
-                <a href="./index.html"><img src="./img/logo_2.png" alt="" /></a>
+                <a href="/"><img src="./img/logo_2.png" alt="" /></a>
               </div>
               <ul>
                 <!-- <li>Address: 60-49 Road 11378 New York</li> -->
@@ -24,9 +24,9 @@
             <div class="footer-widget">
               <h5>Information</h5>
               <ul>
-                <li><a href="#">About Us</a></li>
+                <li><a href="/about">About Us</a></li>
                 <li><a href="#">Checkout</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="/contact">Contact</a></li>
                 <!-- <li><a href="#">Serivius</a></li> -->
               </ul>
             </div>

@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
-                        <a href="./index.html">
+                        <a href="/">
                             <img class="logo" src="./img/logo_2.png" alt="" />
                         </a>
                     </div>
@@ -120,9 +120,9 @@
         <div class="container">
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li class="active"><a href="./index.html">Home</a></li>
+                    <li class="active"><a href="/">Home</a></li>
                     <li>
-                        <a href="./shop.html">Shop</a>
+                        <a href="/shop">Shop</a>
                         <ul class="dropdown">
 
                             <li><a href="cate-bulid.html">Build your Box</a></li>
@@ -133,10 +133,10 @@
 
                         </ul>
                     </li>
-                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="/contact">Contact</a></li>
 
 
-                    <li><a href="./about-us.html">About us</a></li>
+                    <li><a href="/about">About us</a></li>
 
                     @if (Auth::check())
                         <li> <a href="{{ route('profile.edit', [Auth::user()]) }}"

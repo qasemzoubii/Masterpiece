@@ -11,6 +11,11 @@
           <div class="col-lg-12">
             <div class="blog-details-inner">
               <div class="col-lg-12">
+                <div class="breadcrumb-text">
+              <a href="/"><i class="fa fa-home"></i> Home</a>
+              <span>About Us</span>
+            </div>
+            <br>
             <div class="section-title">
               <h2>ABOUT US</h2>
             </div>
