@@ -3,13 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link ret="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>@yield('title')</title>
     <!-- <link
       rel="shortcut icon"
       type="image/png"
       href="../assets/images/logos/logo.png"
     /> -->
-    <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    <link rel="stylesheet" href="{{ asset('../assets/css/styles.min.css') }}" />
   </head>
 
   <body>
@@ -31,7 +35,7 @@
             class="brand-logo d-flex align-items-center justify-content-between"
           >
             <a class="navbar-brand" href="index.html"
-              ><img src="../assets/images/logos/logo.png" style="width: 110px;" alt=""></a
+              ><img src="{{ asset('../assets/images/logos/logo.png') }}" style="width: 110px;" alt=""></a
             >
             <div
               class="close-btn d-xl-none d-block sidebartoggler cursor-pointer"
@@ -74,7 +78,7 @@
               <li class="sidebar-item">
                 <a
                   class="sidebar-link"
-                  href="./categories.html"
+                  href="{{ route('category.index') }}"
                   aria-expanded="false"
                 >
                   <span>
@@ -223,3 +227,4 @@
           </nav>
         </header>
         <!--////////////////////////////////////////// END Of Header //////////////////////////////////////////-->
+        

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryDashController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +16,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('pages.index');
 });
+Route::get('index', function () {
+    return view('admin.pages.index');
+});
+
+// Route::resource('category', CategoryController::class);
+Route::resource('category', CategoryDashController::class);
+
+
 Route::get('/contact', function () {
     return view('pages.contact');
+});
+
+Route::get('/dash', function () {
+    return view('admin.pages.index');
 });
 
 Route::get('/about', function () {
