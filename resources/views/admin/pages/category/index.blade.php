@@ -38,9 +38,9 @@
                                 <form action="{{ route('category.destroy',$category->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger m-1 deleteBtn"><i class="ti ti-trash"></i>Delete</button>
+                                    <button type="submit" class="btn btn-outline-danger m-1 deleteBtn w-50"><i class="ti ti-trash"></i>Delete</button>
                                 </form>
-                                <a href="{{ route('category.edit',$category->id) }}"><button type="button" class="btn btn-outline-success m-1"><i class="ti ti-pencil"></i>Edit</button></a>
+                                <a href="{{ route('category.edit',$category->id) }}"><button type="button" class="btn btn-outline-success m-1 w-50"><i class="ti ti-pencil"></i>Edit</button></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -48,16 +48,9 @@
                         </tbody>
                     </table>
 
-                    {{ $categories->links('pagination::bootstrap-4')}}
-
+                    {{ $categories->links('pagination::bootstrap-4')}}  
                 </div>
-                {{-- <div id="customModal" class="modal col-lg-2">
-                    <div class="modal-content">
-                        <p id="sure">Are you sure?</p>
-                        <button id="btnOK"><a id="btnOK" href="{{ route('category.destroy',$category->id)}}">Delete</a></button>
-                        <button id="btnCancel"><a id="btnCancel" href='{{ route('category.index') }}'>Cancel</a></button>
-                    </div>
-                </div> --}}
+
             </div>
         </div>
     </div>

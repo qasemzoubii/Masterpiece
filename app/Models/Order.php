@@ -26,9 +26,9 @@ class Order extends Model
         return $this->belongsTo(Discount::class);
     }
     
-    public function cart() //With Cart Model (1:1)
-    {
-        return $this->belongsTo(Cart::class);
-    }
+    // public function cart() //With Cart Model (1:1)
+    // {
+    //     return $this->belongsTo(Cart::class);
+    // }
 
 }

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('image')->nullable();
-            $table->boolean('role')->nullable();
-            $table->string('mobile')->nullable();
+            $table->enum('role',['admin','user'])->default('user');
+            $table->string('phone')->nullable();
             $table->string('country')->nullable();
             $table->string('street_address')->nullable();
             $table->bigInteger('post_code')->nullable();

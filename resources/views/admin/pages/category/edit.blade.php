@@ -33,17 +33,17 @@
                         <h3>Edit Category</h3>
                         <br>
                         <br>
+                        <div class="d-flex">
+                        <div class="col-lg-6 ">
                         <form action="{{ route('category.update',$category->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
+                                
                                 <label for="addedItemName" class="form-label">Name :</label>
                                 <input type="text" class="form-control" id="addedItemName" name="name" value="{{ $category->name }}">
                             </div>
-                            {{-- <div class="mb-3">
-                                <label for="addedItemPrice" class="form-label">Price :</label>
-                                <input type="text" class="form-control" id="addedItemPrice" name="addedItemPrice">
-                            </div> --}}
+
                             <div class="mb-3">
                                 <label for="addedItemDesc" class="form-label">Description :</label>
                                 <textarea class="form-control" id="addedItemDesc" name="description" >{{ $category->description }}
@@ -52,9 +52,16 @@
                             <div class="mb-3">
                                 <label for="addedItemIamge" class="form-label">Image :</label>
                                 <input type="file" class="form-control" id="addedItemImage" name="image" value="{{ $category->image }}">
+                                
+
                             </div>
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
+
+                        </div>
+                        <div class="col-lg-6 mx-5"><img src="{{url($category->image )}}"  alt="Present Perfect" class="mw-100 h-75"></div>
+
+                        </div>
                     </div>
                     
                 </div>

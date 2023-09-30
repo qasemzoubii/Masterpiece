@@ -18,7 +18,7 @@
                                         <div class="col">
                                             <h2 class="page-title">Profile</h2>
                                             <ul class="breadcrumb">
-                                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                                <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
                                                 <li class="breadcrumb-item active">Profile</li>
                                             </ul>
                                         </div>

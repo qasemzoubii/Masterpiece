@@ -16,9 +16,9 @@ class CategoryDashController extends Controller
      */
     public function index()
     {
-        $categories = Category ::latest()->paginate(5);
-        return view('admin.pages.category.index',compact('categories')) 
-        ->with('i',(request()->input('page',1)-1)*5);
+        $categories = Category::latest()->paginate(5);
+        return view('admin.pages.category.index', compact('categories'))
+            ->with((request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -40,18 +40,18 @@ class CategoryDashController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'description'=>'required',
+            'name' => 'required',
+            'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         //all data that comes from user are stored in request
         $input = $request->all();
-            if ($image = $request->file('image')) {
+        if ($image = $request->file('image')) {
             $destinationPath = 'images/';
-            $profileImage ='images/' . date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $profileImage = 'images/' . date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
-    }
+        }
         Category::create($input);
 
         return redirect()->route('category.index')
@@ -79,7 +79,7 @@ class CategoryDashController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id);
-        return view('admin.pages.category.edit',compact('category'));
+        return view('admin.pages.category.edit', compact('category'));
     }
 
     /**
@@ -125,6 +125,6 @@ class CategoryDashController extends Controller
     {
         Category::destroy($id);
         return redirect()->route('category.index')
-        ->with('success','Category deleted successfully');
+            ->with('success', 'Category deleted successfully');
     }
 }

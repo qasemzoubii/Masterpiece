@@ -3,6 +3,15 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryDashController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductDashController;
+use App\Http\Controllers\UserDashController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DiscountController;
+use App\Models\Contact;
+use App\Models\Discount;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,10 +32,18 @@ Route::get('/', function () {
 });
 Route::get('index', function () {
     return view('admin.pages.index');
+})->name('index');
+Route::get('profilee', function () {
+    return view('admin.pages.profile');
 });
 
 // Route::resource('category', CategoryController::class);
 Route::resource('category', CategoryDashController::class);
+Route::resource('product', ProductDashController::class);
+Route::resource('contacts', ContactController::class);
+Route::resource('user', UserDashController::class);
+Route::resource('order', OrderController::class);
+Route::resource('discount', DiscountController::class);
 
 
 Route::get('/contact', function () {
@@ -40,9 +57,11 @@ Route::get('/dash', function () {
 Route::get('/about', function () {
     return view('pages.about');
 });
+
 Route::get('/shop', function () {
     return view('pages.shop');
 });
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
