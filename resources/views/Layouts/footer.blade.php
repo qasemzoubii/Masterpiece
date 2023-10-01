@@ -5,7 +5,7 @@
           <div class="col-lg-3">
             <div class="footer-left">
               <div class="footer-logo">
-                <a href="/"><img src="./img/logo_2.png" alt="" /></a>
+                <a href="/"><img src="{{ asset('./img/logo_2.png')}}" alt="" /></a>
               </div>
               <ul>
                 <!-- <li>Address: 60-49 Road 11378 New York</li> -->
@@ -71,7 +71,7 @@
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               </div>
               <div class="payment-pic">
-                <img src="img/payment-method.png" alt="" />
+                <img src="{{ asset('img/payment-method.png')}}" alt="" />
               </div>
             </div>
           </div>
@@ -81,15 +81,15 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery.zoom.min.js"></script>
-    <script src="js/jquery.dd.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.countdown.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.zoom.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.dd.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.slicknav.js')}}"></script>
+    <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{ asset('js/main.js')}}"></script>
   </body>
 </html>

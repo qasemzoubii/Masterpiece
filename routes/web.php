@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CategoryDashController;
+// use App\Http\Controllers\CategoryDashController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ProductDashController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserDashController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DiscountController;
@@ -27,9 +27,13 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('pages.index');
-});
+Route::get('/', [ProductController::class, 'home'])->name('home');
+Route::get('/shop/{category_id}', [ProductController::class, 'shop'])->name('shop');
+Route::get('/product/{product_id}', [ProductController::class, 'product'])->name('product');
+
+
+
+
 Route::get('index', function () {
     return view('admin.pages.index');
 })->name('index');
@@ -38,12 +42,15 @@ Route::get('profilee', function () {
 });
 
 // Route::resource('category', CategoryController::class);
-Route::resource('category', CategoryDashController::class);
-Route::resource('product', ProductDashController::class);
+Route::resource('category', CategoryController::class);
+Route::resource('product', ProductController::class);
 Route::resource('contacts', ContactController::class);
 Route::resource('user', UserDashController::class);
 Route::resource('order', OrderController::class);
 Route::resource('discount', DiscountController::class);
+
+
+
 
 
 Route::get('/contact', function () {

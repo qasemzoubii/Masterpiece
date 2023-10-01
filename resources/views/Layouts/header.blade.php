@@ -13,16 +13,26 @@
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"
         rel="stylesheet" />
     <link rel="icon" href="#">
+
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/themify-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css" />
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/themify-icons.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/elegant-icons.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/nice-select.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/slicknav.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/style.css')}}" type="text/css" />
 </head>
 
 <body>
@@ -39,7 +49,7 @@
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
                         <a href="/">
-                            <img class="logo" src="./img/logo_2.png" alt="" />
+                            <img class="logo" src="{{ asset('./img/logo_2.png')}}" alt="" />
                         </a>
                     </div>
                 </div>

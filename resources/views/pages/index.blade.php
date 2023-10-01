@@ -58,37 +58,18 @@
               <h2>Gifts for Occasions</h2>
             </div>
           </div>
+          @foreach ( $categories as $category)
           <div class="col-lg-4">
             <div class="single-banner">
-            <a href="/cate-birthday.html">
-                <img src="img/Birthday_2.png" alt="" />
+            <a href="{{route('shop',$category->id)}}">
+                <img src="{{ $category->image }}" alt="" />
                 <div class="inner-text">
-                  <h4>Birthday</h4>
+                  <h4>{{ $category->name }}</h4>
                 </div>
               </a>
             </div>
           </div>
-          <div class="col-lg-4">
-            <div class="single-banner">
-            <a href="/cate-graduation.html">
-            <img src="img/Graduation_Gifts.jpg" alt="" />
-              <div class="inner-text">
-                <h4>Graduation</h4>
-              </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="single-banner">
-              <a href="/cate-wedding.html">
-              <img src="img/Wedding_Gifts.jpg" alt="" />
-              <div class="inner-text">
-              <h4>Wedding</h4>
-              </div>
-              </a>
-
-            </div>
-          </div>
+          @endforeach
         </div>
       </div>
     </div>

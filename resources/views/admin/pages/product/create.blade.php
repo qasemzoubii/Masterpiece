@@ -49,7 +49,7 @@
                         <div class="mb-3">
                             <label for="category" class="form-label">Category:</label>
                             <select class="form-select" id="category" name="category_id">
-                                <option value="">Select a category</option>
+                                <option value="" selected disabled>Select a category</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
