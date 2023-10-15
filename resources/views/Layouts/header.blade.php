@@ -14,25 +14,22 @@
         rel="stylesheet" />
     <link rel="icon" href="#">
 
-     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
 
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/themify-icons.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/elegant-icons.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/nice-select.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/slicknav.min.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/style.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/elegant-icons.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" />
 </head>
 
 <body>
@@ -49,7 +46,7 @@
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
                         <a href="/">
-                            <img class="logo" src="{{ asset('./img/logo_2.png')}}" alt="" />
+                            <img class="logo" src="{{ asset('./img/logo_2.png') }}" alt="" />
                         </a>
                     </div>
                 </div>
@@ -62,6 +59,7 @@
                         </div>
                     </div>
                 </div>
+                {{-- @livewire('header-search-component') --}}
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
                         <li class="heart-icon">
@@ -71,42 +69,35 @@
                             </a>
                         </li>
                         <li class="cart-icon">
-                            <a href="#">
+                            <a href="{{ route('cart') }}">
                                 <i class="icon_bag_alt"></i>
-                                <span>3</span>
+                                <span>{{ count($cart) }}</span>
                             </a>
                             <div class="cart-hover">
                                 <div class="select-items">
                                     <table>
                                         <tbody>
-                                            <tr>
-                                                <td class="si-pic">
-                                                    <img src="img/select-product-1.jpg" alt="" />
-                                                </td>
-                                                <td class="si-text">
-                                                    <div class="product-selected">
-                                                        <p>$60.00 x 1</p>
-                                                        <h6>Kabino Bedside Table</h6>
-                                                    </div>
-                                                </td>
-                                                <td class="si-close">
-                                                    <i class="ti-close"></i>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="si-pic">
-                                                    <img src="img/select-product-2.jpg" alt="" />
-                                                </td>
-                                                <td class="si-text">
-                                                    <div class="product-selected">
-                                                        <p>$60.00 x 1</p>
-                                                        <h6>Kabino Bedside Table</h6>
-                                                    </div>
-                                                </td>
-                                                <td class="si-close">
-                                                    <i class="ti-close"></i>
-                                                </td>
-                                            </tr>
+                                            @foreach ($cart as $item)
+                                                <tr>
+                                                    <td class="si-pic">
+                                                        <img height="71px" width="71px"
+                                                            src="{{url( isset($item->product) ? $item->product->image : $item['image']) }}"
+                                                            alt="" />
+                                                    </td>
+                                                    <td class="si-text">
+                                                        <div class="product-selected">
+                                                            <p>{{ isset($item->product) ? $item->product->price : $item['price'] }}
+                                                                JD</p>
+                                                            <h6>{{ isset($item->product) ? $item->product->name : $item['productname'] }}
+                                                            </h6>
+                                                        </div>
+                                                    </td>
+                                                    <td class="si-close">
+                                                        <i class="ti-close"></i>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -115,7 +106,7 @@
                                     <h5>$120.00</h5>
                                 </div>
                                 <div class="select-button">
-                                    <a href="#" class="primary-btn view-card">VIEW CARD</a>
+                                    <a href="{{ route('cart') }}" class="primary-btn view-card">VIEW CARD</a>
                                     <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
                                 </div>
                             </div>
@@ -130,23 +121,20 @@
         <div class="container">
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li class="active"><a href="/">Home</a></li>
-                    <li>
-                        <a href="/shop">Shop</a>
+                    <li @yield('Home')><a href="/">Home</a></li>
+                    {{-- <li class="active"><a href="/">Home</a></li> --}}
+                    <li @yield('Shop')>
+                        <a href="#" disabled>Shop</a>
                         <ul class="dropdown">
-
-                            <li><a href="cate-bulid.html">Build your Box</a></li>
-                            <li><a href="/cate-birthday.html">Birthday</a></li>
-                            <li><a href="/cate-wedding.html">Wedding</a></li>
-                            <li><a href="/cate-graduation.html">Graduations</a></li>
-
-
+                            @foreach ($navCategories as $navCat)
+                                <li><a href="{{ route('shop', $navCat->id) }}">{{ $navCat->name }}</a></li>
+                            @endforeach
                         </ul>
                     </li>
-                    <li><a href="/contact">Contact</a></li>
+                    <li @yield('Contact')><a href="/contact">Contact</a></li>
 
 
-                    <li><a href="/about">About us</a></li>
+                    <li @yield('About')><a href="/about">About us</a></li>
 
                     @if (Auth::check())
                         <li> <a href="{{ route('profile.edit', [Auth::user()]) }}"
@@ -161,8 +149,8 @@
                                 </a></li>
                         </form>
                     @else
-                        <li><a href="/login" class="login-panel"></i>Login</a></li>
-                        <li><a href="/register" class="login-panel"></i>Register</a></li>
+                        <li @yield('Login')><a href="/login" class="login-panel"></i>Login</a></li>
+                        <li @yield('Register')><a href="/register" class="login-panel"></i>Register</a></li>
                     @endif
         </div>
         </ul>

@@ -1,9 +1,25 @@
 
 @extends('Layouts.master')
 @section('title', 'Register')
+@section('Register')
+class="active"
+@endsection
+
 
 @section('content')
     <!-- Breadcrumb Form Section Begin -->
+        <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a>
+                        <span>Register</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Register Section Begin -->
     <div class="register-login-section spad">

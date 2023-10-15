@@ -1,5 +1,9 @@
 @extends('Layouts.master')
 @section('title', 'Login')
+@section('Login')
+class="active"
+@endsection
+
 
 @section('content')
     <!-- Header End -->
@@ -10,7 +14,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <a href="#"><i class="fa fa-home"></i> Home</a>
+                        <a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a>
                         <span>Login</span>
                     </div>
                 </div>

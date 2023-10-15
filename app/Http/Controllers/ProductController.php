@@ -173,6 +173,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         return view('pages.index', compact('categories'));
+        
     }
 
     public function shop($category_id)

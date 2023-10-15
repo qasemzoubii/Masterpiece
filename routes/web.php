@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 // use App\Http\Controllers\CategoryDashController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserDashController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Livewire\SearchComponent;
 use App\Models\Contact;
 use App\Models\Discount;
 use App\Models\Order;
@@ -25,11 +27,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get ('/search' ,SearchComponent::class)->name('product.search');
 
 
 Route::get('/', [ProductController::class, 'home'])->name('home');
 Route::get('/shop/{category_id}', [ProductController::class, 'shop'])->name('shop');
-Route::get('/product/{product_id}', [ProductController::class, 'product'])->name('product');
+Route::get('/product/{product_id}', [ProductController::class, 'product'])->name('products');
 
 
 
@@ -50,7 +53,10 @@ Route::resource('order', OrderController::class);
 Route::resource('discount', DiscountController::class);
 
 
-
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
+Route::post('/cart/updateS', [CartController::class, 'cartUpdateS'])->name('cartUpdateS');
+Route::post('/cart/updateD', [CartController::class, 'cartUpdateD'])->name('cartUpdateD');
 
 
 Route::get('/contact', function () {
@@ -67,6 +73,9 @@ Route::get('/about', function () {
 
 Route::get('/shop', function () {
     return view('pages.shop');
+});
+Route::get('/checkout', function () {
+    return view('pages.check-out');
 });
 
 Route::get('/dashboard', function () {

@@ -17,6 +17,8 @@ class OrderController extends Controller
         $orders = order::latest()->paginate(5);
         return view('admin.pages.order.index', compact('orders'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
+
+
     }
 
     /**
@@ -84,4 +86,10 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function checkoutView(){
+        return view('pages.check-out');
+    }
 }
+
+

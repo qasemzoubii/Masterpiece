@@ -1,5 +1,9 @@
 @extends('Layouts.master')
 @section('title', 'Contact Us')
+@section('Contact')
+class="active"
+@endsection
+
 
 @section('content')
     <!-- Header End -->

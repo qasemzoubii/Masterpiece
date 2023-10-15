@@ -20,18 +20,16 @@
 
 
 
-                      @for ($i = 1; $i <= 5; $i++)
+                        @for ($i = 1; $i <= 5; $i++)
                             @php
                                 $imageKey = 'image' . $i;
                             @endphp
                             @if ($product->$imageKey)
-
-
-                            <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                            href="{{ url($product->$imageKey) }}" class="item-thumb">
-                            <img width="60" height="60" class="rounded-2" src="{{ url($product->$imageKey) }}" />
-                        </a>
-
+                                <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank"
+                                    data-type="image" href="{{ url($product->$imageKey) }}" class="item-thumb">
+                                    <img width="60" height="60" class="rounded-2"
+                                        src="{{ url($product->$imageKey) }}" />
+                                </a>
                             @endif
                         @endfor
 
@@ -73,10 +71,10 @@
                         </div>
 
                         <p>
-                            {{ $product->description}}
+                            {{ $product->description }}
                         </p>
 
-                         <div class="row">
+                        <div class="row">
                             <dt class="col-3">Occasion:</dt>
                             <dd class="col-9">{{ $category->name }}</dd>
 
@@ -84,25 +82,25 @@
                             {{-- <dd class="col-9">Mix</dd> --}}
 
                             <!-- <dt class="col-3">Material</dt>
-                    <dd class="col-9">Cotton, Jeans</dd> -->
+                        <dd class="col-9">Cotton, Jeans</dd> -->
 
                             <!-- <dt class="col-3">Brand</dt>
-                    <dd class="col-9">Reebook</dd> -->
+                        <dd class="col-9">Reebook</dd> -->
                         </div>
 
                         <hr />
                         <div class="row mb-4">
                             <!-- <div class="col-md-4 col-6" style="margin-top: 33px;">
-                      <label class="mb-2">Size</label>
-                      <select
-                        class="form-select border border-secondary"
-                        style="height: 35px"
-                      >
-                        <option>Small</option>
-                        <option>Medium</option>
-                        <option>Large</option>
-                      </select>
-                    </div> -->
+                          <label class="mb-2">Size</label>
+                          <select
+                            class="form-select border border-secondary"
+                            style="height: 35px"
+                          >
+                            <option>Small</option>
+                            <option>Medium</option>
+                            <option>Large</option>
+                          </select>
+                        </div> -->
                             <!-- col.// -->
                             <div class="col-md-4 col-6 mb-3">
                                 <label class="mb-2 d-block">Quantity</label>
@@ -111,14 +109,18 @@
 
 
 
-                                <div class="product-details">
-                                    <div class="quantity" style="display: -webkit-box;">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1" />
+                                <form action="{{ route('cart.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                    <div class="product-details">
+                                        <div class="quantity" style="display: -webkit-box;">
+                                            <div class="pro-qty pro-qty-js">
+                                                <input type="text" value="1" name="quantity">
+                                            </div>
+                                            <button style="white-space: nowrap;" type="submit" class="primary-btn pd-cart">Add to cart</button>
                                         </div>
-                                        <a href="#" class="primary-btn pd-cart">Add to cart</a>
                                     </div>
-                                </div>
+                                </form>
 
 
 
@@ -156,7 +158,7 @@
                             </div>
                         </div>
                         <a href="check-out.html" class="btn btn-warning shadow-0"> BUY NOW </a>
-                        <a href="shopping-cart.html" class="btn btn-primary shadow-0">
+                        <a href="{{ route('cart.store', $id = $product->id) }}" class="btn btn-primary shadow-0">
                             <i class="me-1 fa fa-shopping-basket"></i> ADD TO CART
                         </a>
 

@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\Cart;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -29,6 +30,59 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+
+
+        $sessionCart = session('cart');
+
+        if ($sessionCart != null) {
+            $cartproducts = cart::where('user_id', auth()->user()->id);
+
+
+            foreach ($sessionCart as $cartItem) {
+                $existingCartItem = $cartproducts->where('product_id', $cartItem['productId'])->first();
+                if ($existingCartItem) {
+                    $existingCartItem->quantity += $cartItem['quantity'];
+                    $existingCartItem->save();
+                } else {
+
+                    cart::create([
+                        'product_id' => $cartItem['productId'],
+                        'user_id' => auth()->user()->id,
+                        'quantity' => $cartItem['quantity']
+                    ]);
+                }
+
+            }
+        }
+        
+
+
+
+
+
+
+
+        // $sessionCart = session('cart');
+        
+        // if ($sessionCart != null) {
+        //     cart::where('user_id', auth()->user()->id)->delete();
+        //     foreach ($sessionCart as $item) {
+        //         cart::create([
+        //             'product_id' => $item['productId'],
+        //             'user_id' => auth()->user()->id,
+        //             'quantity' => $item['quantity']
+        //         ]);
+        //     }
+        // }
+
+
+
+
+
+
+
+
+
         return redirect()->intended('/');
     }
 
@@ -42,6 +96,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+        
+        session()->forget('cart');
 
         return redirect('/');
     }

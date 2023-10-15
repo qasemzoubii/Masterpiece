@@ -112,6 +112,16 @@ ol {
   margin: 0;
 }
 
+  a[disabled] {
+    pointer-events: none; /* Disable pointer events */
+    color: gray; /* Change the color to gray or any other color to indicate it's disabled */
+    text-decoration: none; /* Remove underline */
+    cursor: not-allowed; /* Change cursor to "not allowed" */
+  }
+
+
+
+
 /*---------------------
   Helper CSS
 -----------------------*/
@@ -2720,7 +2730,7 @@ ol {
 }
 
 .cart-table table tr th.p-name {
-  text-align: left;
+  /* text-align: left; */
 }
 
 .cart-table table tr td {
@@ -2737,7 +2747,7 @@ ol {
 }
 
 .cart-table table tr td.cart-title {
-  text-align: left;
+  /* text-align: left; */
 }
 
 .cart-table table tr td.cart-title h5 {
