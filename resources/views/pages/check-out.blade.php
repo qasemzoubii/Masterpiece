@@ -26,9 +26,9 @@
         <form action="#" class="checkout-form">
           <div class="row">
             <div class="col-lg-6">
-              <div class="checkout-content">
+              {{-- <div class="checkout-content">
                 <a href="login.html" class="content-btn">Click Here To Login</a>
-              </div>
+              </div> --}}
               <h4>Billing Details</h4>
               <div class="row">
                 <div class="col-lg-6">
@@ -80,25 +80,45 @@
               </div>
             </div>
             <div class="col-lg-6">
-              <div class="checkout-content">
+              {{-- <div class="checkout-content">
                 <input type="text" placeholder="Enter Your Coupon Code" />
-              </div>
+              </div> --}}
               <div class="place-order">
                 <h4>Your Order</h4>
+
                 <div class="order-total">
                   <ul class="order-table">
                     <li>Product <span>Total</span></li>
-                    <li class="fw-normal">
-                      Flowers Gift Box XL <span>35JD</span>
-                    </li>
-                    <!-- <li class="fw-normal">
+
+                    @php
+                      $total=0
+                    @endphp
+
+
+                      @foreach ($cart as $item)
+                      
+                      <li class="fw-normal">
+                        {{ $item->Product->name }} <span> {{  $item->quantity }} <b style="color: #e7ab3c">X</b> {{ $item->Product->price }} JD</x>
+                      </li>
+                      @php
+                        $total += ($item->Product->price * $item->quantity)
+                      @endphp
+                      @endforeach
+
+
+
+
+
+
+
+                    {{-- <!-- <li class="fw-normal">
                       Combination x 1 <span>$60.00</span>
                     </li>
                     <li class="fw-normal">
                       Combination x 1 <span>$120.00</span>
-                    </li> -->
-                    <li class="fw-normal">Subtotal <span>35JD</span></li>
-                    <li class="total-price">Total <span>35JD</span></li>
+                    </li> --> --}}
+                    {{-- <li class="fw-normal">Subtotal <span>35JD</span></li> --}}
+                    <li class="total-price">Total <span>{{ $total }} JD</span></li>
                   </ul>
                   <div class="payment-check">
                     <div class="pc-item">

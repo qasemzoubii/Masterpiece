@@ -40,7 +40,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                  <div id="cartUPdate" class="alert alert-warning" style="display: none; text-align: center;"> مبرووك انت <b>بتوكلو</b> اعد تحميل الحقيبة  لتطبيق التغيرات</div>
+                                  <div id="cartUPdate" class="alert alert-warning" style="display: none; text-align: center;"> Please Click On <b> UPDATE CART </b> To Save The Changes </div>
                                 </tr>
                                 <form action="{{ isset($cart[0]->Product) ? route('cartUpdateD') : route('cartUpdateS') }}"
                                     method="POST">
@@ -60,7 +60,7 @@
                                             <td class="qua-col first-row">
                                                 <div class="quantity">
                                                     <div class="pro-qty">
-                                                      <span class="dec qtybtn" onclick="decrementQuantity('quantity{{ isset($item->Product) ? $item->Product->id : $item['productId'] }}', {{ isset($item->Product) ? $item->Product->price : $item['price'] }})">-</span>
+                                                        <span class="dec qtybtn" onclick="decrementQuantity('quantity{{ isset($item->Product) ? $item->Product->id : $item['productId'] }}', {{ isset($item->Product) ? $item->Product->price : $item['price'] }})">-</span>
                                                         <input type="text"
                                                             onchange="updateTotal({{ isset($item->Product) ? $item->Product->id : $item['productId'] }},{{ isset($item->Product) ? $item->Product->price : $item['price'] }})"
                                                             id="quantity{{ isset($item->Product) ? $item->Product->id : $item['productId'] }}"
@@ -106,7 +106,7 @@
                                     <li class="subtotal">Subtotal <span>35JD</span></li>
                                     <li class="cart-total">Total <span>35JD</span></li>
                                 </ul>
-                                <a href="check-out.html" class="proceed-btn">PROCEED TO CHECK OUT</a>
+                                <a href="{{ route('checkout') }}" class="proceed-btn">PROCEED TO CHECK OUT</a>
                             </div>
                         </div>
                     </div>

@@ -173,11 +173,11 @@ class CartController extends Controller
         $cart = session()->get('cart', []); // Retrieve the cart from session
 
         foreach ($cart as $key => $item) {
-            $quantity = $request->input('quantity' . $item['id']);
+            $quantity = $request->input('quantity' . $item['productId']);
 
             // Check if the quantity is valid (non-negative integer)
             if (!is_numeric($quantity) || $quantity < 0 || floor($quantity) != $quantity) {
-                return redirect()->back()->with('error', 'Invalid quantity for ' . $item['name']);
+                return redirect()->back()->with('error', 'Invalid quantity for ' . $item['productname']);
             }
 
             // Update the quantity
@@ -201,7 +201,7 @@ class CartController extends Controller
 
             // Check if the quantity is valid (non-negative integer)
             if (!is_numeric($quantity) || $quantity < 0 || floor($quantity) != $quantity) {
-                return redirect()->back()->with('error', 'Invalid quantity for product ID ' . $cartItem->product_id);
+                return redirect()->back()->with('error', 'Invalid quantity for the product ' . $cartItem->product->name);
             }
 
             // Update the quantity

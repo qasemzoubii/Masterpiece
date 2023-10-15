@@ -104,6 +104,18 @@
         </script>
     @endif
 
+     @if (session('error'))
+        <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                Swal.fire(
+                    'error',
+                    '{{ session('error') }}',
+                    'error'
+                );
+            });
+        </script>
+    @endif
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 

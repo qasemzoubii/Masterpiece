@@ -10,10 +10,6 @@ use App\Http\Controllers\UserDashController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Livewire\SearchComponent;
-use App\Models\Contact;
-use App\Models\Discount;
-use App\Models\Order;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get ('/search' ,SearchComponent::class)->name('product.search');
+Route::get('/search', SearchComponent::class)->name('product.search');
 
 
 Route::get('/', [ProductController::class, 'home'])->name('home');
@@ -74,9 +70,10 @@ Route::get('/about', function () {
 Route::get('/shop', function () {
     return view('pages.shop');
 });
-Route::get('/checkout', function () {
-    return view('pages.check-out');
-});
+
+
+Route::get('/checkout',[OrderController::class, 'checkoutView'])->name('checkout');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -88,4 +85,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

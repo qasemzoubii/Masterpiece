@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -88,8 +89,14 @@ class OrderController extends Controller
     }
 
     public function checkoutView(){
+
         return view('pages.check-out');
+        if (Auth::user()) {
+        }
+        return redirect()->back()->with('error', 'You Must Login First!');
+
     }
+
 }
 
 
