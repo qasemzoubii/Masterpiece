@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\orderitem;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderitemController extends Controller
@@ -14,7 +15,9 @@ class OrderitemController extends Controller
      */
     public function index()
     {
+
         //
+
     }
 
     /**
@@ -81,5 +84,11 @@ class OrderitemController extends Controller
     public function destroy(orderitem $orderitem)
     {
         //
+    }
+    public function showOrder ($order_id)
+    {
+        $OrderItem = orderitem::where('order_id', $order_id)->get();
+        return view('admin.pages.orderItem.index', compact('OrderItem'))
+            ->with((request()->input('page', 1) - 1) * 5);
     }
 }

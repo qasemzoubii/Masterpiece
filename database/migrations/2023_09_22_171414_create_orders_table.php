@@ -15,17 +15,23 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('address');
+            $table->string('phone');
+            $table->string('country');
+            $table->string('city');
+            $table->string('post_code')->nullable();
+            $table->string('street_address');
             $table->integer('total_quantity');
+            $table->integer('total_price');
             $table->string('status'); 
             $table->string('payment_method');
             $table->unsignedBigInteger('discount_id')->nullable();
             $table->foreign('discount_id')->references('id')->on('discounts')->onDelete('cascade');
             $table->timestamps();
         });
+
+
     }
 
     /**

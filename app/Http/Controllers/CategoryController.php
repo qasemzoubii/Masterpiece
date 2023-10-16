@@ -41,7 +41,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
+            // 'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         //all data that comes from user are stored in request
@@ -93,7 +93,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required |max:30',
-            'description' => 'required |max:300',
+            // 'description' => 'required |max:300',
 
         ]);
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserDashController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderitemController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Livewire\SearchComponent;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,7 @@ Route::get('/search', SearchComponent::class)->name('product.search');
 
 Route::get('/', [ProductController::class, 'home'])->name('home');
 Route::get('/shop/{category_id}', [ProductController::class, 'shop'])->name('shop');
-Route::get('/product/{product_id}', [ProductController::class, 'product'])->name('products');
+Route::get('/viewProduct/{product_id}', [ProductController::class, 'product'])->name('products');
 
 
 
@@ -48,6 +49,7 @@ Route::resource('user', UserDashController::class);
 Route::resource('order', OrderController::class);
 Route::resource('discount', DiscountController::class);
 
+Route::get('/showOrder/{order_id}', [OrderitemController::class, 'showOrder'])->name('showOrder');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
@@ -73,6 +75,9 @@ Route::get('/shop', function () {
 
 
 Route::get('/checkout',[OrderController::class, 'checkoutView'])->name('checkout');
+
+Route::post('/checkout/pay', [OrderController::class,'pay'])->name('pay');
+
 
 
 Route::get('/dashboard', function () {

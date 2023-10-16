@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\order;
+use App\Models\Orderitem;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -96,6 +98,49 @@ class OrderController extends Controller
         return redirect()->back()->with('error', 'You Must Login First!');
 
     }
+
+
+    public function pay(Request $request)
+    {
+
+        $user = Auth::user();
+        $userCart = Cart::where('user_id', $user->id)->get();
+        $total = 0;
+        $totalPrice = 0;
+        foreach ($userCart as $item) {
+            $totalPrice +=$item->quantity *$item->Product->price;
+            $total += $item->quantity;
+        }
+        $order = order::create([
+            'user_id' => $user->id,
+            'phone' => $request->input('phone'),
+            'country' => $request->input('country'),
+            'city' => $request->input('city'),
+            'street_address' => $request->input('street_address'),
+            'post_code' => $request->input('post_code'),
+            'discount_id' => $request->input('discount_id') ? $request->input('discount_id') : null,
+            'payment_method' => $request->input('payment_method'),
+            'total_quantity' => $total,
+            'total_price' => $totalPrice,
+            'status' => "onHold"
+        ]);
+
+        foreach ($userCart as $item) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $item->product_id,
+                'quantity' => $item->quantity,
+                'price' => $item->Product->price,
+            ]);
+            $item->delete();
+        }
+
+
+        return redirect()->route('home')->with('success', 'Your Order Has Been Submitted Successfully');
+
+    }
+
+
 
 }
 

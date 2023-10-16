@@ -15,23 +15,30 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                {{-- <th scope="col">ID</th> --}}
-                                <th scope="col">Name</th>
-                                <th scope="col">address</th>
+                                <th scope="col">User Name</th>
+                                <th scope="col">Country</th>
+                                <th scope="col">city</th>
+                                <th scope="col">street address</th>
                                 <th scope="col">total quantity</th>
+                                <th scope="col">total price</th>
                                 <th scope="col">payment method</th>
-                                <th scope="col">discount</th>
+                                <th scope="col">Post code</th>
+                                <th scope="col">Show More</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($orders as $order)
                             <tr>
-                                {{-- <th scope="row">{{ $category->id }}</th> --}}
                                 <td>{{ $order->user->name }}</td>                                
-                                <td>{{ $order->address }}</td>                                
+                                <td>{{ $order->country }}</td>                                
+                                <td>{{ $order->city }}</td>                                
+                                <td>{{ $order->street_address }}</td>                                
                                 <td>{{ $order->total_quantity }}</td>
+                                <td>{{ $order->total_price }}</td>
                                 <td>{{ $order->payment_method }}</td>
-                                <td>{{ $order->discount->percentage  }} %</td>
+                                <td>{{ $order->post_code ? $order->post_code : "----"}}</td>                                
+                                <td><a href="{{ route('showOrder', $order->id) }}"><button class="btn btn-outline-success m-1 w-100">more</button></a></td>
+                                {{-- <td>{{ $order->discount->percentage  }} %</td> --}}
                                 
                             </tr>
                             @endforeach

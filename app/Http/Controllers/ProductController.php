@@ -47,8 +47,8 @@ class ProductController extends Controller
             'price' => 'required',
             'category_id' => 'required|exists:categories,id',
             // Ensure the category exists
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg  ',
         ]);
 
         // All data that comes from the user are stored in the request
