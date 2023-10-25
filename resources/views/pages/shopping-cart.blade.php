@@ -40,7 +40,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                  <div id="cartUPdate" class="alert alert-warning" style="display: none; text-align: center;"> Please Click On <b> UPDATE CART </b> To Save The Changes </div>
+                                <div id="cartUPdate" class="alert alert-warning" style="display: none; text-align: center;"> Please Click On <b> UPDATE CART </b> To Save The Changes </div>
                                 </tr>
                                 <form action="{{ isset($cart[0]->Product) ? route('cartUpdateD') : route('cartUpdateS') }}"
                                     method="POST">

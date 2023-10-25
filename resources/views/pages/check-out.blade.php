@@ -102,7 +102,7 @@
                       @foreach ($cart as $item)
                       
                       <li class="fw-normal">
-                        {{ $item->Product->name }} <span> {{  $item->quantity }} <b style="color: #e7ab3c">X</b> {{ $item->Product->price }} JD</x>
+                        {{ $item->Product->name }} <span> {{  $item->quantity }} <b style="color: #e7ab3c">X</b> {{ $item->Product->price }} JD </span>
                       </li>
                       @php
                         $total += ($item->Product->price * $item->quantity)
@@ -133,9 +133,15 @@
                       </label> -->
                     </div>
                     <div class="pc-item">
-                      <label for="pc-paypal">
+                      <label for="Cash">
                         Cash
-                        <input type="radio" id="pc-paypal" value="Cash" name="payment_method" required/>
+                        <input type="radio" id="Cash" value="Cash" name="payment_method" required/>
+                        <span class="checkmark"></span>
+                      </label>
+                      <br>
+                      <label for="paypal">
+                        Paypal
+                        <input type="radio" id="paypal" value="paypal" name="payment_method" required/>
                         <span class="checkmark"></span>
                       </label>
                     </div>

@@ -77,6 +77,8 @@ Route::get('/shop', function () {
 Route::get('/checkout',[OrderController::class, 'checkoutView'])->name('checkout');
 
 Route::post('/checkout/pay', [OrderController::class,'pay'])->name('pay');
+Route::get('paypal/success', [OrderController::class, 'success'])->name('paypal_success');
+Route::get('paypal/cancel',  [OrderController::class, 'cancel'])->name('paypal_cancel');
 
 
 
