@@ -49,7 +49,7 @@ class UserDashController extends Controller
         //all data that comes from user are stored in request
         $input = $request->all();
 
-       
+    
 
         if ($image = $request->file('image')) {
             $destinationPath = 'images/';
@@ -105,7 +105,7 @@ class UserDashController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:30', 'regex:/^[a-zA-Z\s]+$/'],
-            'email' => 'required|email|unique:users,email,'.$user->id,      //     'role' => 'required',
+            'email' => 'required|email|unique:users,email,'.$user->id,   //   'role' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'role' => 'required',
         ]);

@@ -137,8 +137,8 @@
                     <li @yield('About')><a href="/about">About us</a></li>
 
                     @if (Auth::check())
-                        <li> <a href="{{ route('profile.edit', [Auth::user()]) }}"
-                                class="nav-item">{{ Auth::user()->name }}</a></li>
+                        <li @yield('Profile')> <a href="{{ route('profile.edit', [Auth::user()]) }}"
+                                class="nav-item @yield('Profile')">{{ Auth::user()->name }}</a></li>
                         <form style="display: inline-block" method="POST" class="nav-item"
                             action="{{ route('logout') }}">
                             @csrf
