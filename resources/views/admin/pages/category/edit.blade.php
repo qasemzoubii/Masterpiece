@@ -44,11 +44,11 @@
                                 <input type="text" class="form-control" id="addedItemName" name="name" value="{{ $category->name }}">
                             </div>
 
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for="addedItemDesc" class="form-label">Description :</label>
                                 <textarea class="form-control" id="addedItemDesc" name="description" >{{ $category->description }}
                                 </textarea>
-                            </div>
+                            </div> --}}
                             <div class="mb-3">
                                 <label for="addedItemIamge" class="form-label">Image :</label>
                                 <input type="file" class="form-control" id="addedItemImage" name="image" value="{{ $category->image }}">

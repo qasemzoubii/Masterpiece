@@ -12,11 +12,11 @@
                 </div>
             </center>
         </div>
-        @if ($message = Session::get('success'))
+        {{-- @if ($message = Session::get('success'))
             <div class="alert alert-success" role="alert">
                 {{ $message }}
             </div>
-        @endif
+        @endif --}}
         <!-- Row 2 -->
         <div class="row">
             <table class="table table-bordered">

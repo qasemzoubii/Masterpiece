@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserDashController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderitemController;
 use App\Http\Controllers\DiscountController;
@@ -34,20 +35,30 @@ Route::get('/viewProduct/{product_id}', [ProductController::class, 'product'])->
 
 
 
-Route::get('index', function () {
-    return view('admin.pages.index');
-})->name('index');
+
+// Route::get('index', function () {
+//     return view('admin.pages.index');
+// })->name('index');
 Route::get('profilee', function () {
     return view('admin.pages.profile');
 });
 
+Route::get('/dashboard_login', [DashboardController::class, 'login'])->name('dashboard_login');
+Route::post('/loginAdmin', [DashboardController::class, 'loginAdmin'])->name('loginAdmin');
+
+Route::middleware(['checkUserRole'])->group(function () {
+    // Routes that require the user to have 'role' set to true
+    Route::get('index', [DashboardController::class, 'index'])->name('index');
+    Route::resource('category', CategoryController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('contacts', ContactController::class);
+    Route::resource('user', UserDashController::class);
+    Route::resource('order', OrderController::class);
+    Route::resource('discount', DiscountController::class);
+});
+
 // Route::resource('category', CategoryController::class);
-Route::resource('category', CategoryController::class);
-Route::resource('product', ProductController::class);
-Route::resource('contacts', ContactController::class);
-Route::resource('user', UserDashController::class);
-Route::resource('order', OrderController::class);
-Route::resource('discount', DiscountController::class);
+
 
 Route::get('/showOrder/{order_id}', [OrderitemController::class, 'showOrder'])->name('showOrder');
 
@@ -61,9 +72,15 @@ Route::get('/contact', function () {
     return view('pages.contact');
 });
 
-Route::get('/dash', function () {
-    return view('admin.pages.index');
-});
+Route::get('/contact-us', [ContactController::class, 'contact']);
+Route::post('/send', [ContactController::class, 'sendEmail'])->name('send.email');
+Route::post('/contact/store', [ContactController::class, 'store'])->name('send.email');
+
+// Route::get('/dash', function () {
+//     return view('admin.pages.index');
+// });
+
+
 
 Route::get('/about', function () {
     return view('pages.about');
@@ -74,11 +91,11 @@ Route::get('/shop', function () {
 });
 
 
-Route::get('/checkout',[OrderController::class, 'checkoutView'])->name('checkout');
+Route::get('/checkout', [OrderController::class, 'checkoutView'])->name('checkout');
 
-Route::post('/checkout/pay', [OrderController::class,'pay'])->name('pay');
+Route::post('/checkout/pay', [OrderController::class, 'pay'])->name('pay');
 Route::get('paypal/success', [OrderController::class, 'success'])->name('paypal_success');
-Route::get('paypal/cancel',  [OrderController::class, 'cancel'])->name('paypal_cancel');
+Route::get('paypal/cancel', [OrderController::class, 'cancel'])->name('paypal_cancel');
 
 
 

@@ -1,9 +1,6 @@
 @extends('Layouts.master')
 @section('title', 'Contact Us')
-@section('Contact')
-class="active"
-@endsection
-
+@section('Contact', 'active')
 
 @section('content')
     <!-- Header End -->
@@ -52,7 +49,7 @@ class="active"
               <p>
                 Contrary to popular belief, Lorem Ipsum is simply random text.
                 It has roots in a piece of classical Latin literature from 45
-                BC, maki years old.
+                BC, making it over 2000 years old.
               </p>
             </div>
             <div class="contact-widget">
@@ -90,16 +87,37 @@ class="active"
               <div class="leave-comment">
                 <h4>Leave A Comment</h4>
                 <p>Our staff will call back later and answer your questions.</p>
-                <form action="#" class="comment-form">
+                @if (Session::get('message_sent'))
+                  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+                  <script>
+                    function showAlert(title, message, icon) {
+                      Swal.fire({
+                        title: title,
+                        text: message,
+                        icon: icon,
+                        showConfirmButton: true,
+                        confirmButtonText: "OK",
+                      });
+                    }
+                    showAlert("Message", "{{ Session::get('message_sent') }}", 'success');
+                  </script>
+                @endif
+                <form action="{{ route('send.email') }}" method="POST" class="comment-form">
+                  @csrf
                   <div class="row">
                     <div class="col-lg-6">
-                      <input type="text" placeholder="Your name" />
+                      <input type="text" name="name" placeholder="Your name" value="{{ old('name') }}" required />
+                      {{-- @error('name') <span class="text-danger">{{ $message }}</span> @enderror --}}
                     </div>
                     <div class="col-lg-6">
-                      <input type="text" placeholder="Your email" />
+                      <input type="text" name="email" placeholder="Your email" value="{{ old('email') }}" required />
+                      {{-- @error('email') <span class="text-danger">{{ $message }}</span> @enderror --}}
+
                     </div>
                     <div class="col-lg-12">
-                      <textarea placeholder="Your message"></textarea>
+                      <textarea placeholder="Your message" name="message" value="{{ old('message') }}" required></textarea>
+                      {{-- @error('message') <span class="text-danger">{{ $message }}</span> @enderror --}}
+
                       <button type="submit" class="site-btn">
                         Send message
                       </button>
@@ -113,4 +131,4 @@ class="active"
       </div>
     </section>
     <!-- Contact Section End -->
-    @endsection
+@endsection

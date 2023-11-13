@@ -9,11 +9,11 @@
                         <a href="{{ route('category.create') }}" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"><i class="ti ti-plus"></i> Add Category</a>
                     </div></center>
                 </div>
-                @if ($message = Session::get('success'))
+                {{-- @if ($message = Session::get('success'))
                 <div class="alert alert-success" role="alert">
                     {{ $message }}
                 </div>
-                @endif
+                @endif --}}
                 <!--  Row 2 -->
                 <div class="row">
                     <table class="table table-bordered">
@@ -22,7 +22,7 @@
                                 {{-- <th scope="col">ID</th> --}}
                                 <th scope="col">Name</th>
                                 <th scope="col">Image</th>
-                                <th scope="col">Description</th>
+                                {{-- <th scope="col">Description</th> --}}
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -32,7 +32,7 @@
                                 {{-- <th scope="row">{{ $category->id }}</th> --}}
                                 <td>{{ $category->name }}</td>                                
                                 <td><img src="{{ $category->image }}" alt="Present Perfect" class="images"></td>
-                                <td>{{ $category->description }}</td>
+                                {{-- <td>{{ $category->description }}</td> --}}
                                 <td>
                                     <br>
                                 <form action="{{ route('category.destroy',$category->id)}}" method="post">

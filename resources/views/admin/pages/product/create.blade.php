@@ -39,12 +39,12 @@
                         @csrf
                         <div class="mb-3">
                             <label for="addedItemName" class="form-label">Name :</label>
-                            <input type="text" class="form-control" id="addedItemName" name="name">
+                            <input type="text" class="form-control" id="addedItemName" name="name" value="{{ old('name') }}">
                         </div>
 
                         <div class="mb-3">
                             <label for="addedItemDesc" class="form-label">Description :</label>
-                            <textarea class="form-control" id="addedItemDesc" name="description"></textarea>
+                            <textarea class="form-control" id="addedItemDesc" name="description" value="{{ old('description') }}"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="category" class="form-label">Category:</label>
@@ -58,31 +58,31 @@
 
                         <div class="mb-3">
                             <label for="addedItemDesc" class="form-label">Price :</label>
-                            <input type="number" min="1" class="form-control" id="addedItemDesc" name="price">
+                            <input type="number" min="1" class="form-control" id="addedItemDesc" name="price" value="{{ old('price') }}">
                         </div>
                         <div class="mb-3">
                             <label for="addedItemIamge" class="form-label">Image :</label>
-                            <input type="file" class="form-control" id="addedItemImage" name="image">
+                            <input type="file" class="form-control" id="addedItemImage" name="image" value="{{ old('image') }}">
                         </div>
                         <div class="mb-3">
                             <label for="addedItemIamge" class="form-label">Image1 :</label>
-                            <input type="file" class="form-control" id="addedItemImage" name="image1">
+                            <input type="file" class="form-control" id="addedItemImage" name="image1" value="{{ old('image1') }}">
                         </div>
                         <div class="mb-3">
                             <label for="addedItemIamge" class="form-label">Image2 :</label>
-                            <input type="file" class="form-control" id="addedItemImage" name="image2">
+                            <input type="file" class="form-control" id="addedItemImage" name="image2" value="{{ old('image2') }}">
                         </div>
                         <div class="mb-3">
                             <label for="addedItemIamge" class="form-label">Image3 :</label>
-                            <input type="file" class="form-control" id="addedItemImage" name="image3">
+                            <input type="file" class="form-control" id="addedItemImage" name="image3" value="{{ old('image3') }}">
                         </div>
                         <div class="mb-3">
                             <label for="addedItemIamge" class="form-label">Image4 :</label>
-                            <input type="file" class="form-control" id="addedItemImage" name="image4">
+                            <input type="file" class="form-control" id="addedItemImage" name="image4" value="{{ old('image4') }}">
                         </div>
                         <div class="mb-3">
                             <label for="addedItemIamge" class="form-label">Image5 :</label>
-                            <input type="file" class="form-control" id="addedItemImage" name="image5">
+                            <input type="file" class="form-control" id="addedItemImage" name="image5" value="{{ old('image5') }}">
                         </div>
                         <button type="submit" class="btn btn-primary">Create</button>
                     </form>

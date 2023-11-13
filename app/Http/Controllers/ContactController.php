@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\contact;
 use Illuminate\Http\Request;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
+
+
 
 class ContactController extends Controller
 {
@@ -37,7 +41,22 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'message' => 'required|string',
+        ]);
+
+        // Store the data in the 'contacts' table
+        $contact = new Contact;
+        $contact->name = $validatedData['name'];
+        $contact->email = $validatedData['email'];
+        $contact->message = $validatedData['message'];
+        // Add other fields if needed
+        $contact->save();
+
+        // Optionally, you can add a success message to the session
+        return redirect('/contact')->with('message_sent', 'Your message has been sent successfully!');
     }
 
     /**
@@ -84,4 +103,22 @@ class ContactController extends Controller
     {
         //
     }
+
+    public function contact()
+    {
+        return view('pages.contact');
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $details = [
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'message' => $request->message
+
+        ];
+
+        Mail::to($request->email)->send(new ContactMail($details));
+        return back()->with('message_sent', 'Your message has been sent successfully');
+}
 }

@@ -22,4 +22,29 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
+     @if (session('success'))
+        <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                Swal.fire(
+                    'success',
+                    '{{ session('success') }}',
+                    'success'
+                );
+            });
+        </script>
+    @endif
+
+     @if (session('error'))
+        <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                Swal.fire(
+                    'error',
+                    '{{ session('error') }}',
+                    'error'
+                );
+            });
+        </script>
+    @endif
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </script>

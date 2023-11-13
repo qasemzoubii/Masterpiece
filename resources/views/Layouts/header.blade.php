@@ -138,14 +138,14 @@
 
                     @if (Auth::check())
                         <li @yield('Profile')> <a href="{{ route('profile.edit', [Auth::user()]) }}"
-                                class="nav-item @yield('Profile')">{{ Auth::user()->name }}</a></li>
+                                class="nav-item @yield('Profile')"> <i class="fa-solid fa-user" style="color: #e7ab3c;"></i> {{ Auth::user()->name }}</a></li>
                         <form style="display: inline-block" method="POST" class="nav-item"
                             action="{{ route('logout') }}">
                             @csrf
 
-                            <li> <a href="{{ route('logout') }}"
+                            <li>  <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Log Out') }} <i class="fa-solid fa-arrow-right-from-bracket" style="color: #e7ab3c;"></i>
                                 </a></li>
                         </form>
                     @else

@@ -9,11 +9,11 @@
                         <a href="{{ route('discount.create') }}" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"><i class="ti ti-plus"></i> Add Discount</a>
                     </div></center>
                 </div>
-                @if ($message = Session::get('success'))
+                {{-- @if ($message = Session::get('success'))
                 <div class="alert alert-success" role="alert">
                     {{ $message }}
                 </div>
-                @endif
+                @endif --}}
                 <!--  Row 2 -->
                 <div class="row">
                     <table class="table table-bordered">

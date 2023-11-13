@@ -40,21 +40,21 @@
                         
                         <div class="mb-3">
                             <label for="addedItemName" class="form-label">Name :</label>
-                            <input type="text" class="form-control" id="addedItemName" name="name">
+                            <input type="text" class="form-control" id="addedItemName" name="name" value="{{ old('name') }}">
                         </div>
 
                         <div class="mb-3">
                             <label for="addedItemIamge" class="form-label">Image :</label>
-                            <input type="file" class="form-control" id="addedItemImage" name="image">
+                            <input type="file" class="form-control" id="addedItemImage" name="image" value="{{ old('image') }}">
                         </div>
 
                         <div class="mb-3">
                             <label for="addedItemName" class="form-label">ُEmail :</label>
-                            <input type="email" class="form-control" id="addedItemName" name="email">
+                            <input type="email" class="form-control" id="addedItemName" name="email" value="{{ old('email') }}">
                         </div>
                         <div class="mb-3">
                             <label for="addedItemName" class="form-label">Password :</label>
-                            <input type="password" class="form-control" id="addedItemName" name="password">
+                            <input type="password" class="form-control" id="addedItemName" name="password" value="{{ old('password') }}">
                         </div>
                         
                         <div class="mb-3">
