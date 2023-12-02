@@ -50,7 +50,7 @@ class ProductController extends Controller
             'price' => 'required',
             'category_id' => 'required|exists:categories,id',
             // Ensure the category exists
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'image' => 'required|image',
             'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg  ',
         ]);
 
@@ -122,9 +122,9 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name' => 'required |max:30',
-            'description' => 'required |max:300',
-            'price' => 'required |max:300',
+            'name' => 'required ',
+            'description' => 'required ',
+            'price' => 'required |min:1',
 
         ]);
 
@@ -212,24 +212,14 @@ class ProductController extends Controller
             $query->orderBy('price', 'asc');
         }
 
-        $products = $query->get();
+        $products = $query->paginate(6);
         $categories = Category::all();
         $category = Category::find($category_id);
-        $products = Product::where('category_id', $category_id)->paginate(2);
+        // $products = Product::where('category_id', $category_id)->paginate(6);
         return view('pages.shop', compact('products', 'categories', 'category', 'category_id'));
     }
 
 
-    // public function old_product($product_id)
-    // {
-    //     $product = product::where('id', $product_id)->first();
-    //     $category = Category::where('id', $product->category_id)->first();
-    //     $productCategory = $product->category_id;
-    //     $related = Product::where('category_id', $productCategory)->inRandomOrder()->take(6)->get();
-    //     // $related = Product::where('category_id', $product->category_id)->inRandomOrder()->take(6)->get();
-
-    //     return view('pages.single-product', compact('product', 'category','productCategory' , 'related'));
-    // }
 
 
     public function product($product_id)
@@ -296,7 +286,7 @@ class ProductController extends Controller
             $query->where('category_id', $category_id);
         }
 
-        $products = $query->paginate(2);
+        $products = $query->paginate(6);
         $category = Category::find($category_id);
 
         return view('pages.shop', compact('products', 'categories', 'category', 'category_id'));
