@@ -39,14 +39,6 @@
                                 <label for="addedItemName" class="form-label">Name :</label>
                                 <input type="text" class="form-control" id="addedItemName" name="name" value="{{ old('name') }}">
                             </div>
-                            {{-- <div class="mb-3">
-                                <label for="addedItemPrice" class="form-label">Price :</label>
-                                <input type="text" class="form-control" id="addedItemPrice" name="addedItemPrice">
-                            </div> --}}
-                            {{-- <div class="mb-3">
-                                <label for="addedItemDesc" class="form-label">Description :</label>
-                                <textarea class="form-control" id="addedItemDesc" name="description"></textarea>
-                            </div> --}}
                             <div class="mb-3">
                                 <label for="addedItemIamge" class="form-label">Image :</label>
                                 <input type="file" class="form-control" id="addedItemImage" name="image" value="{{ old('image') }}">

@@ -82,52 +82,38 @@
                             {{-- <dd class="col-9">Mix</dd> --}}
 
                             <!-- <dt class="col-3">Material</dt>
-                        <dd class="col-9">Cotton, Jeans</dd> -->
+                                    <dd class="col-9">Cotton, Jeans</dd> -->
 
                             <!-- <dt class="col-3">Brand</dt>
-                        <dd class="col-9">Reebook</dd> -->
+                                    <dd class="col-9">Reebook</dd> -->
                         </div>
 
                         <hr />
                         <div class="row mb-4">
                             <!-- <div class="col-md-4 col-6" style="margin-top: 33px;">
-                          <label class="mb-2">Size</label>
-                          <select
-                            class="form-select border border-secondary"
-                            style="height: 35px"
-                          >
-                            <option>Small</option>
-                            <option>Medium</option>
-                            <option>Large</option>
-                          </select>
-                        </div> -->
+                                      <label class="mb-2">Size</label>
+                                      <select
+                                        class="form-select border border-secondary"
+                                        style="height: 35px"
+                                      >
+                                        <option>Small</option>
+                                        <option>Medium</option>
+                                        <option>Large</option>
+                                      </select>
+                                    </div> -->
                             <!-- col.// -->
                             <div class="col-md-4 col-6 mb-3">
                                 <label class="mb-2 d-block">Quantity</label>
-
-
-
-
-
-                                <form action="{{ route('cart.store') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" value="{{ $product->id }}" name="product_id">
-                                    <div class="product-details">
-                                        <div class="quantity" style="display: -webkit-box;">
-                                            <div class="pro-qty pro-qty-js">
-                                                <input type="text" value="1" name="quantity">
-                                            </div>
-                                            <button style="white-space: nowrap;" type="submit" class="primary-btn pd-cart">Add to cart</button>
+                                <div class="product-details">
+                                    <div class="quantity" style="display: -webkit-box;">
+                                        <div class="pro-qty pro-qty-js">
+                                            <input type="text" value="1" name="qty">
                                         </div>
+                                        <a href="{{ route('store.add-to-cart', $product->id) }}"
+                                            style="white-space: nowrap;" class="primary-btn pd-cart">Add to
+                                            cart</a>
                                     </div>
-                                </form>
-
-
-
-
-
-
-
+                                </div>
 
 
                                 {{-- <div class="input-group mb-3" style="width: 170px ;  ">
@@ -157,10 +143,10 @@
                   </div> --}}
                             </div>
                         </div>
-                        <a href="check-out.html" class="btn btn-warning shadow-0"> BUY NOW </a>
-                        <a href="{{ route('cart.store', $id = $product->id) }}" class="btn btn-primary shadow-0">
+                        {{-- <a href="check-out.html" class="btn btn-warning shadow-0"> BUY NOW </a> --}}
+                        {{-- <a href="{{ route('cart.store', $id = $product->id) }}" class="btn btn-primary shadow-0">
                             <i class="me-1 fa fa-shopping-basket"></i> ADD TO CART
-                        </a>
+                        </a> --}}
 
                     </div>
                 </main>
@@ -184,109 +170,42 @@
                     </div>
                 </div>
                 <div class="product-slider owl-carousel">
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <img src="img/products/889_grande.jpg" alt="" />
-                            <!-- <div class="sale">Sale</div> -->
-                            <div class="icon">
-                                <i class="icon_heart_alt"></i>
+                    @foreach ($related as $item)
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="{{ url($item->image) }}" alt="" />
+                                <!-- <div class="sale">Sale</div> -->
+                                <div class="icon">
+                                    {{-- <i class="icon_heart_alt"></i> --}}
+                                </div>
+                                <ul>
+                                    <li class="w-icon active">
+                                        <a class="product-cart-icon"
+                                            href="{{ route('store.add-to-cart', $item->id) }}"><i
+                                                class="icon_bag_alt"></i></a>
+                                    </li>
+                                    <li class="quick-view"><a href="{{ route('products', $item->id) }}">
+                                            View Product</a></li>
+                                    <li class="w-icon">
+                                        <!-- <a href="#"><i class="fa fa-random"></i></a> -->
+                                    </li>
+                                </ul>
                             </div>
-                            <ul>
-                                <li class="w-icon active">
-                                    <!-- <a href="#"><i class="icon_bag_alt"></i></a> -->
-                                </li>
-                                <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                <li class="w-icon">
-                                    <!-- <a href="#"><i class="fa fa-random"></i></a> -->
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="pi-text">
-                            <!-- <div class="catagory-name">Coat</div> -->
-                            <a href="#">
-                                <h5>Chocolate rose bouquet</h5>
-                            </a>
-                            <div class="product-price">
-                                30JD
-                                <!-- <span>$35.00</span> -->
+                            <div class="pi-text">
+                                <!-- <div class="catagory-name">Coat</div> -->
+                                <a href="#">
+                                    <h5>{{ $item->name }}</h5>
+                                </a>
+                                <div class="product-price">
+                                    {{ $item->price }} JD
+                                    <!-- <span>$35.00</span> -->
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <img src="img/products/01_0c622fa3-c6b9-4dc2-be2d-f07caa30d8c0_grande.jpg" alt="" />
-                            <div class="icon">
-                                <i class="icon_heart_alt"></i>
-                            </div>
-                            <ul>
-                                <li class="w-icon active">
-                                    <!-- <a href="#"><i class="icon_bag_alt"></i></a> -->
-                                </li>
-                                <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                <li class="w-icon">
-                                    <!-- <a href="#"><i class="fa fa-random"></i></a> -->
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="pi-text">
-                            <!-- <div class="catagory-name">Shoes</div> -->
-                            <a href="#">
-                                <h5>Graduation hood box</h5>
-                            </a>
-                            <div class="product-price">20JD</div>
-                        </div>
-                    </div>
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <img src="img/products/original_CW_grande.jpg" alt="" />
-                            <div class="icon">
-                                <i class="icon_heart_alt"></i>
-                            </div>
-                            <ul>
-                                <li class="w-icon active">
-                                    <!-- <a href="#"><i class="icon_bag_alt"></i></a> -->
-                                </li>
-                                <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                <li class="w-icon">
-                                    <!-- <a href="#"><i class="fa fa-random"></i></a> -->
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="pi-text">
-                            <!-- <div class="catagory-name">Towel</div> -->
-                            <a href="#">
-                                <h5>BOSS Number One 125ml</h5>
-                            </a>
-                            <div class="product-price">50JD</div>
-                        </div>
-                    </div>
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <img src="img/products/DSC_0010_grande.jpg" alt="" />
-                            <div class="icon">
-                                <i class="icon_heart_alt"></i>
-                            </div>
-                            <ul>
-                                <li class="w-icon active">
-                                    <!-- <a href="#"><i class="icon_bag_alt"></i></a> -->
-                                </li>
-                                <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                <li class="w-icon">
-                                    <!-- <a href="#"><i class="fa fa-random"></i></a> -->
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="pi-text">
-                            <!-- <div class="catagory-name">Towel</div> -->
-                            <a href="#">
-                                <h5>Flowers Gift Box XL</h5>
-                            </a>
-                            <div class="product-price">35JD</div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
-        </div>
         </div>
     </section>
 

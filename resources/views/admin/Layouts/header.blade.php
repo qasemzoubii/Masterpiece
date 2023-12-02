@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,8 +32,9 @@
             <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a class="navbar-brand" href="{{ route('index') }}"><img src="{{ asset('../assets/images/logos/logo.png') }}"
-                            style="width: 110px;" alt=""></a>
+                    <a class="navbar-brand" href="{{ route('index') }}"><img
+                            src="{{ asset('../assets/images/logos/logo.png') }}" style="width: 110px;"
+                            alt=""></a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>
                     </div>
@@ -176,8 +178,11 @@
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">My Profile</p>
                                         </a>
-                                        <a href="./authentication-login.html"
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();document.getElementById('adminLogoutForm').submit();"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                                        <form action="{{ route('logout') }}" id="adminLogoutForm" method="POST">
+                                            @csrf</form>
                                     </div>
                                 </div>
                             </li>

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
 use App\Models\Cart;
@@ -40,6 +41,8 @@ class AppServiceProvider extends ServiceProvider
             }
 
             $view->with(compact('navCategories', 'cart'));
+
+            Paginator::useBootstrap();
         });
 
 

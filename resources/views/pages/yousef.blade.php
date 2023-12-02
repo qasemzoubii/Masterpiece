@@ -26,8 +26,8 @@
     <div class="container light-style flex-grow-1 container-p-y "style="margin:110px auto">
 
         <!-- <h4 class="font-weight-bold py-3 mb-4">
-                                                                    Account settings
-                                                                </h4> -->
+                                                                        Account settings
+                                                                    </h4> -->
 
         <div class="card overflow-hidden" style='FONT-SIZE: 1.5em;'>
             <div class="row no-gutters row-bordered row-border-light">
@@ -62,7 +62,8 @@
                                 <div class="card-body media align-items-center">
                                     {{-- <img src="{{ asset('images' . Auth::user()->image) }}" --}}
                                     <img src="{{ url(Auth::user()->image ? Auth::user()->image : 'images/default.png') }}"
-                                        style="height: 100px; border-radius: 90%; width: 100px !important;" alt="" class="d-block ui-w-80">
+                                        style="height: 100px; border-radius: 90%; width: 100px !important;" alt=""
+                                        class="d-block ui-w-80">
                                     <div class="media-body ml-4">
                                         <label class="btn btn-info ">
                                             Upload new photo

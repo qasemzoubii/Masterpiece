@@ -112,13 +112,13 @@ class ContactController extends Controller
     public function sendEmail(Request $request)
     {
         $details = [
-            'name'=> $request->name,
-            'email'=> $request->email,
+            'name' => $request->name,
+            'email' => $request->email,
             'message' => $request->message
 
         ];
 
         Mail::to($request->email)->send(new ContactMail($details));
         return back()->with('message_sent', 'Your message has been sent successfully');
-}
+    }
 }

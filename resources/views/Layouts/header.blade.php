@@ -16,8 +16,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <!-- Css Styles -->
@@ -50,50 +49,57 @@
                         </a>
                     </div>
                 </div>
+                @php
+                    $defaultCategoryId = isset($category_id) ? $category_id : 1;
+                @endphp
                 <div class="col-lg-7 col-md-7" style="margin-top: 40px">
-                    <div class="advanced-search">
-                        <button type="button" class="category-btn">All Categories</button>
-                        <div class="input-group">
-                            <input type="text" placeholder="What do you need?" />
-                            <button type="button"><i class="ti-search"></i></button>
+                    <form action="{{ route('search', ['category_id' => $defaultCategoryId]) }}" method="get">
+                        <div class="advanced-search">
+                            {{-- <button type="button" class="category-btn">All Categories</button> --}}
+                            <div class="input-group" style="width: 100%">
+                                <input name="name" type="text" placeholder="What do you need?" />
+                                <button name="submit" type="submit"><i class="ti-search"></i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 {{-- @livewire('header-search-component') --}}
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
-                        <li class="heart-icon">
+                        {{-- <li class="heart-icon">
                             <a href="#">
                                 <i class="icon_heart_alt"></i>
                                 <span>1</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="cart-icon">
                             <a href="{{ route('cart') }}">
                                 <i class="icon_bag_alt"></i>
-                                <span>{{ count($cart) }}</span>
+                                <span>{{ Cart::count() }}</span>
                             </a>
                             <div class="cart-hover">
                                 <div class="select-items">
                                     <table>
                                         <tbody>
-                                            @foreach ($cart as $item)
+                                            @foreach (Cart::content() as $product)
                                                 <tr>
                                                     <td class="si-pic">
                                                         <img height="71px" width="71px"
-                                                            src="{{url( isset($item->product) ? $item->product->image : $item['image']) }}"
+                                                            src="{{ asset($product->options->image) }}"
                                                             alt="" />
                                                     </td>
                                                     <td class="si-text">
                                                         <div class="product-selected">
-                                                            <p>{{ isset($item->product) ? $item->product->price : $item['price'] }}
-                                                                JD</p>
-                                                            <h6>{{ isset($item->product) ? $item->product->name : $item['productname'] }}
+                                                            <p>
+                                                                {{ $product->price }} JD</p>
+                                                            <h6>
+                                                                {{ $product->name }}
                                                             </h6>
                                                         </div>
                                                     </td>
                                                     <td class="si-close">
-                                                        <i class="ti-close"></i>
+                                                        <a href="{{ route('remove-product', $product->rowId) }}"><i
+                                                                class="ti-close"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -103,7 +109,7 @@
                                 </div>
                                 <div class="select-total">
                                     <span>total:</span>
-                                    <h5>$120.00</h5>
+                                    <h5>{{ Cart::total() }} JD</h5>
                                 </div>
                                 <div class="select-button">
                                     <a href="{{ route('cart') }}" class="primary-btn view-card">VIEW CARD</a>
@@ -111,7 +117,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="cart-price">$150.00</li>
+                        <li class="cart-price">{{ Cart::total() }} JD</li>
                     </ul>
                 </div>
             </div>
@@ -138,14 +144,16 @@
 
                     @if (Auth::check())
                         <li @yield('Profile')> <a href="{{ route('profile.edit', [Auth::user()]) }}"
-                                class="nav-item @yield('Profile')"> <i class="fa-solid fa-user" style="color: #e7ab3c;"></i> {{ Auth::user()->name }}</a></li>
+                                class="nav-item @yield('Profile')"> <i class="fa-solid fa-user"
+                                    style="color: #e7ab3c;"></i> {{ Auth::user()->name }}</a></li>
                         <form style="display: inline-block" method="POST" class="nav-item"
                             action="{{ route('logout') }}">
                             @csrf
 
-                            <li>  <a href="{{ route('logout') }}"
+                            <li> <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();this.closest('form').submit();">
-                                    {{ __('Log Out') }} <i class="fa-solid fa-arrow-right-from-bracket" style="color: #e7ab3c;"></i>
+                                    {{ __('Log Out') }} <i class="fa-solid fa-arrow-right-from-bracket"
+                                        style="color: #e7ab3c;"></i>
                                 </a></li>
                         </form>
                     @else

@@ -13,10 +13,10 @@
                             <li>Email: qasem.zoubi2000@gmail.com</li>
                         </ul>
                         <div class="footer-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-github"></i></a>
+                            <a href="https://www.facebook.com/qasemzo3bii/" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/qasemzo3bii/"target="_blank" ><i class="fa fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/qasem-zo3bi/"target="_blank" ><i class="fa fa-linkedin"></i></a>
+                            <a href="https://github.com/qasemzoubii" target="_blank"><i class="fa fa-github"></i></a>
                         </div>
                     </div>
                 </div>
@@ -35,9 +35,8 @@
                     <div class="footer-widget">
                         <h5>My Account</h5>
                         <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Shopping Cart</a></li>
+                            <li><a href="/profile">My Account</a></li>
+                            <li><a href="/cart">Shopping Cart</a></li>
                             <li><a href="#">Shop</a></li>
                         </ul>
                     </div>

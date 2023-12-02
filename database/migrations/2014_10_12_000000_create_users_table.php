@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('image')->nullable();
             $table->enum('role',['admin','user'])->default('user');
             $table->string('phone')->nullable();
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('street_address')->nullable();
             $table->bigInteger('post_code')->nullable();
             $table->string('city')->nullable();
+            $table->string('google_id')->nullable();
             $table->rememberToken();
             $table->timestamps();   
         });

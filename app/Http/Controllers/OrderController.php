@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\order;
 use App\Models\Orderitem;
-use App\Models\Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
@@ -105,20 +105,11 @@ class OrderController extends Controller
 
     public function pay(Request $request)
     {
-
-        $user = Auth::user();
-        $userCart = Cart::where('user_id', $user->id)->get();
-        $total = 0;
-        $totalPrice = 0;
-        foreach ($userCart as $item) {
-            $totalPrice += $item->quantity * $item->Product->price;
-            $total += $item->quantity;
-        }
-
         if ($request->input('payment_method') == 'paypal') {
             $provider = new PayPalClient;
             $provider->setApiCredentials(config('paypal'));
             $paypalToken = $provider->getAccessToken();
+
             $response = $provider->createOrder([
                 "intent" => "CAPTURE",
                 "application_context" => [
@@ -129,7 +120,7 @@ class OrderController extends Controller
                     [
                         "amount" => [
                             "currency_code" => "USD",
-                            "value" => $totalPrice
+                            "value" => Cart::total()
                         ]
                     ]
                 ]
@@ -153,16 +144,16 @@ class OrderController extends Controller
                         return redirect()->away($link['href']);
                     }
                 }
-                
+
             } else {
                 return redirect()->route('paypal_cancel');
             }
 
 
         }
-
+        $user_id = Auth::user()->id;
         $order = order::create([
-            'user_id' => $user->id,
+            'user_id' => $user_id,
             'phone' => $request->input('phone'),
             'country' => $request->input('country'),
             'city' => $request->input('city'),
@@ -170,38 +161,25 @@ class OrderController extends Controller
             'post_code' => $request->input('post_code'),
             'discount_id' => $request->input('discount_id') ? $request->input('discount_id') : null,
             'payment_method' => $request->input('payment_method'),
-            'total_quantity' => $total,
-            'total_price' => $totalPrice,
+            'total_price' => Cart::total(),
             'status' => "onHold"
         ]);
 
-        foreach ($userCart as $item) {
+        foreach (Cart::content() as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
-                'product_id' => $item->product_id,
-                'quantity' => $item->quantity,
-                'price' => $item->Product->price,
+                'product_id' => $item->id,
+                'quantity' => $item->qty,
+                'price' => $item->price,
             ]);
-            $item->delete();
         }
-
-
+        Cart::destroy();
         return redirect()->route('home')->with('success', 'Your Order Has Been Submitted Successfully');
 
     }
 
     public function success(Request $request)
     {
-        $user = Auth::user();
-        $userCart = Cart::where('user_id', $user->id)->get();
-        $total = 0;
-        $totalPrice = 0;
-
-        foreach ($userCart as $item) {
-            $totalPrice += $item->quantity * $item->Product->price;
-            $total += $item->quantity;
-        }
-
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken();
@@ -212,9 +190,9 @@ class OrderController extends Controller
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
             // $payment = $_SESSION['paymentDetail'];
             $payment = session('paymentDetail');
-
+            $user_id = Auth::user()->id;
             $order = order::create([
-                'user_id' => $user->id,
+                'user_id' => $user_id,
                 'phone' => $payment['phone'],
                 'country' => $payment['country'],
                 'city' => $payment['city'],
@@ -222,24 +200,19 @@ class OrderController extends Controller
                 'post_code' => $payment['post_code'],
                 'discount_id' => $payment['discount_id'] ? $payment['discount_id'] : null,
                 'payment_method' => $payment['payment_method'],
-                'total_quantity' => $total,
-                'total_price' => $totalPrice,
+                'total_price' => Cart::total(),
                 'status' => "onHold"
             ]);
 
-            foreach ($userCart as $item) {
+            foreach (Cart::content() as $item) {
                 OrderItem::create([
                     'order_id' => $order->id,
-                    'product_id' => $item->product_id,
-                    'quantity' => $item->quantity,
-                    'price' => $item->Product->price,
+                    'product_id' => $item->id,
+                    'quantity' => $item->qty,
+                    'price' => $item->price,
                 ]);
-                $item->delete();
             }
-
-            // unset($_SESSION['paymentDetail']);
-            session()->forget('paymentDetail');
-
+            Cart::destroy();
             return redirect()->route('home')->with('success', 'Your Order Has Been Submitted Successfully');
         } else {
             return redirect()->route('paypal_cancel');
@@ -251,7 +224,7 @@ class OrderController extends Controller
         return redirect()->route('home')->with('error', 'Payment is cancelled!');
 
     }
-    
+
 
 
 

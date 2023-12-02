@@ -172,16 +172,45 @@ class ProductController extends Controller
     public function home()
     {
         $categories = Category::all();
-        return view('pages.index', compact('categories'));
-        
+        $products = Product::orderBy('created_at', 'desc')->take(8)->get();
+        return view('pages.index', compact('categories','products'));
+
     }
 
-    public function shop($category_id)
+
+    public function shop(Request $request, $category_id)
     {
-        $products = product::where('category_id', $category_id)->get();
+        $query = Product::query();
+
+        $sort = $request->input('sort', 'az');
+        if ($category_id !== null) {
+            $query->where('category_id', $category_id);
+        }
+
+        // Price filtering logic
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+
+        if ($minPrice !== null && $maxPrice !== null) {
+            $query->whereBetween('price', [$minPrice, $maxPrice]);
+            // session()->flash('success', 'Price range filtered');
+        }
+
+        if ($sort === 'az') {
+            $query->orderBy('name', 'asc');
+        } elseif ($sort === 'za') {
+            $query->orderBy('name', 'desc');
+        } elseif ($sort === 'high_price') {
+            $query->orderBy('price', 'desc');
+        } elseif ($sort === 'low_price') {
+            $query->orderBy('price', 'asc');
+        }
+
+        $products = $query->get();
         $categories = Category::all();
-        $category = Category::where('id', $category_id)->first();
-        return view('pages.shop', compact('products', 'categories', 'category'));
+        $category = Category::find($category_id);
+        $products = Product::where('category_id' , $category_id)->paginate(2);
+        return view('pages.shop', compact('products', 'categories', 'category', 'category_id'));
     }
 
 
@@ -189,7 +218,67 @@ class ProductController extends Controller
     {
         $product = product::where('id', $product_id)->first();
         $category = Category::where('id', $product->category_id)->first();
-        return view('pages.single-product', compact('product', 'category'));
+        $productCategory = $product->category_id;
+        $related = Product::where('category_id', $productCategory)->inRandomOrder()->take(6)->get();
+        // $related = Product::where('category_id', $product->category_id)->inRandomOrder()->take(6)->get();
+
+        return view('pages.single-product', compact('product', 'category','productCategory' , 'related'));
     }
+
+
+    public function search(Request $request, $category_id = null)
+    {
+        $query = Product::query();
+        
+        $sort = $request->input('sort', 'az');
+        if ($category_id !== null) {
+            $query->where('category_id', $category_id);
+        }
+        // Price filtering logic
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+
+        if ($minPrice !== null && $maxPrice !== null) {
+            $query->whereBetween('price', [$minPrice, $maxPrice]);
+            // session()->flash('success', 'Price range filtered');
+        }
+
+        if ($sort === 'az') {
+            $query->orderBy('name', 'asc');
+        } elseif ($sort === 'za') {
+            $query->orderBy('name', 'desc');
+        } elseif ($sort === 'high_price') {
+            $query->orderBy('price', 'desc');
+        } elseif ($sort === 'low_price') {
+            $query->orderBy('price', 'asc');
+        }
+        
+        $categories = Category::all();
+
+        if ($request->has('name')) {
+            $query->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+
+        // If a category ID is provided, filter products by that category
+        if ($category_id !== null) {
+            $query->where('category_id', $category_id);
+        }
+
+        $products = $query->paginate(2);
+        $category = Category::find($category_id);
+
+        return view('pages.shop', compact('products', 'categories', 'category', 'category_id'));
+    }
+
+    
+
+
+
+
+
 }
 
+
+
+
+    

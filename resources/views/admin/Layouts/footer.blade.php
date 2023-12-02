@@ -39,7 +39,7 @@
             window.addEventListener('DOMContentLoaded', (event) => {
                 Swal.fire(
                     'error',
-                    '{{ session('error') }}',
+                    `{{ session('error') }}`,
                     'error'
                 );
             });
@@ -48,3 +48,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </script>
+    <script>
+        
+        function confirmAndSubmit(Id) {
+            // Use SweetAlert for confirmation
+            Swal.fire({
+                title: 'Are You Sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Confirm',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var formId = 'deleteForm' + Id;
+                    $('#' + formId).submit();
+                }
+            });
+        }
+        
+        </script>

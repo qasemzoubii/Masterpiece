@@ -11,6 +11,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderitemController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\GoogleAuthController;
+
 use App\Http\Livewire\SearchComponent;
 use Illuminate\Support\Facades\Route;
 
@@ -25,20 +27,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/search', SearchComponent::class)->name('product.search');
 
 
 Route::get('/', [ProductController::class, 'home'])->name('home');
+
 Route::get('/shop/{category_id}', [ProductController::class, 'shop'])->name('shop');
+// Route::get('/shop/filterByPrice/{category_id?}', [ProductController::class, 'shop'])->name('shop.filterByPrice');
+Route::get('/search/{category_id?}', [ProductController::class, 'search'])->name('search');
+
+
+
 Route::get('/viewProduct/{product_id}', [ProductController::class, 'product'])->name('products');
 
 
 
+Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
 
 
-// Route::get('index', function () {
-//     return view('admin.pages.index');
-// })->name('index');
+
+Route::get('/cart', [CartController::class, 'cartPage'])->name('cart');
+Route::get('/store/add-to-cart/{product_id}', [CartController::class, 'addToCart'])->name('store.add-to-cart');
+Route::get('qty-increment/{rowId}', [CartController::class, 'qtyIncrement'])->name('qty-increment');
+Route::get('qty-decrement/{rowId}', [CartController::class, 'qtyDecrement'])->name('qty-decrement');
+Route::get('remove-product/{rowId}', [CartController::class, 'removeProduct'])->name('remove-product');
+
+
 Route::get('profilee', function () {
     return view('admin.pages.profile');
 });
@@ -57,15 +71,11 @@ Route::middleware(['checkUserRole'])->group(function () {
     Route::resource('discount', DiscountController::class);
 });
 
-// Route::resource('category', CategoryController::class);
 
 
 Route::get('/showOrder/{order_id}', [OrderitemController::class, 'showOrder'])->name('showOrder');
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
-Route::post('/cart/updateS', [CartController::class, 'cartUpdateS'])->name('cartUpdateS');
-Route::post('/cart/updateD', [CartController::class, 'cartUpdateD'])->name('cartUpdateD');
+
 
 
 Route::get('/contact', function () {
@@ -76,9 +86,7 @@ Route::get('/contact-us', [ContactController::class, 'contact']);
 Route::post('/send', [ContactController::class, 'sendEmail'])->name('send.email');
 Route::post('/contact/store', [ContactController::class, 'store'])->name('send.email');
 
-// Route::get('/dash', function () {
-//     return view('admin.pages.index');
-// });
+
 
 
 
@@ -103,7 +111,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

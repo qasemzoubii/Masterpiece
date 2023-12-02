@@ -37,11 +37,14 @@
                                 <td><img src="{{ $user->image }}" alt="Present Perfect" class="images"></td>
                                 <td>
                                     <br>
-                                <form action="{{ route('user.destroy',$user->id)}}" method="post">
+                                <form id="deleteForm{{ $user->id }}"
+                                    action="{{ route('user.destroy', $user->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger m-1 deleteBtn w-50"><i class="ti ti-trash"></i>Delete</button>
                                 </form>
+
+                                <a class="btn btn-outline-danger m-1 deleteBtn w-50" href="#"
+                                    onclick="confirmAndSubmit({{ $user->id }})">Delete</a>
                                 <a href="{{ route('user.edit',$user->id) }}"><button type="button" class="btn btn-outline-success m-1 w-50"><i class="ti ti-pencil"></i>Edit</button></a>
                                 </td>
                             </tr>

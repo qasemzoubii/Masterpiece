@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('city');
             $table->string('post_code')->nullable();
             $table->string('street_address');
-            $table->integer('total_quantity');
             $table->integer('total_price');
             $table->string('status'); 
             $table->string('payment_method');

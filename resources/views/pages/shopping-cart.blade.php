@@ -11,7 +11,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text product-more">
                         <a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a>
-                        <a href="./shop.html">Shop</a>
+                        {{-- <a href="./shop.html">Shop</a> --}}
                         <span>Shopping Cart</span>
                     </div>
                 </div>
@@ -26,6 +26,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="cart-table">
+                        @if (!Cart::Count() == 0)
                         <table>
 
                             <thead>
@@ -39,57 +40,53 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                <div id="cartUPdate" class="alert alert-warning" style="display: none; text-align: center;"> Please Click On <b> UPDATE CART </b> To Save The Changes </div>
-                                </tr>
-                                <form action="{{ isset($cart[0]->Product) ? route('cartUpdateD') : route('cartUpdateS') }}"
-                                    method="POST">
-                                    @csrf
-                                    @foreach ($cart as $item)
-                                        <tr>
-                                            <td class="cart-pic first-row">
-                                                <img src="{{ isset($item->product) ? $item->product->image : $item['image'] }}"
-                                                    alt="" />
-                                            </td>
-                                            <td class="cart-title first-row">
-                                                <h5>{{ isset($item->product) ? $item->product->name : $item['productname'] }}
-                                                </h5>
-                                            </td>
-                                            <td class="p-price first-row">
-                                                {{ isset($item->product) ? $item->product->price : $item['price'] }} JD</td>
-                                            <td class="qua-col first-row">
-                                                <div class="quantity">
-                                                    <div class="pro-qty">
-                                                        <span class="dec qtybtn" onclick="decrementQuantity('quantity{{ isset($item->Product) ? $item->Product->id : $item['productId'] }}', {{ isset($item->Product) ? $item->Product->price : $item['price'] }})">-</span>
-                                                        <input type="text"
-                                                            onchange="updateTotal({{ isset($item->Product) ? $item->Product->id : $item['productId'] }},{{ isset($item->Product) ? $item->Product->price : $item['price'] }})"
-                                                            id="quantity{{ isset($item->Product) ? $item->Product->id : $item['productId'] }}"
-                                                            value="{{ isset($item->product) ? $item->quantity : $item['quantity'] }}"
-                                                            name="quantity{{ isset($item->Product) ? $item->Product->id : $item['productId'] }}" />
-                                                            <span class="inc qtybtn" onclick="incrementQuantity('quantity{{ isset($item->Product) ? $item->Product->id : $item['productId'] }}', {{ isset($item->Product) ? $item->Product->price : $item['price'] }})">+</span>
+                                        @foreach (Cart::content() as $product)
+                                            <tr>
+                                                <td class="cart-pic first-row">
+                                                    <a href="{{ route('products', $product->id) }}"><img width="150"
+                                                            src="{{ asset($product->options->image) }}"
+                                                            alt="" /></a>
+                                                </td>
+                                                <td class="cart-title first-row">
+                                                    <h5>{{ $product->name }}</h5>
+                                                </td>
+                                                <td class="p-price first-row">
+                                                    {{ $product->price }} JD</td>
+                                                <td class="qua-col first-row">
+                                                    <div class="quantity">
+                                                        <div class="pro-qty">
+                                                            <a href="{{ route('qty-decrement', $product->rowId) }}"
+                                                                class="dec qtybtn">-</a>
+                                                            <input style="width:50px" type="text" class="form-control"
+                                                                value="{{ $product->qty }}" min="1" max="21">
+                                                            <a href="{{ route('qty-increment', $product->rowId) }}"
+                                                                class="inc qtybtn">+</a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="total-price first-row">
-                                                <span id="total{{ isset($item->Product) ? $item->Product->id : $item['productId'] }}">{{ isset($item->product) ? $item->product->price * $item->quantity : $item['price'] * $item['quantity'] }}</span>
-                                                JD
-                                            </td>
-                                            <td class="close-td first-row"><i class="ti-close"></i></td>
-                                        </tr>
-                                    @endforeach
-                                 
-
-
-                            </tbody>
-                        </table>
+                                                </td>
+                                                <td class="total-price first-row">
+                                                    <span>{{ $product->price * $product->qty }}</span>
+                                                </td>
+                                                <td class="close-td first-row"><a
+                                                        href="{{ route('remove-product', $product->rowId) }}"><i
+                                                            class="ti-close"></i></a></td>
+                                            </tr>
+                                        @endforeach
+                                        
+                                    </tbody>
+                                </table>
+                                @else
+                                    <div class="text-center w-100 my-5 py-5">
+                                        <p class="h4">The Cart Is Empty </p>
+                                    </div>
+                                @endif
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="cart-buttons">
                                 <a href="#" class="primary-btn continue-shop">Continue shopping</a>
-                                <button type="submit" class="primary-btn up-cart">Update cart</button>
+                                {{-- <button type="submit" class="primary-btn up-cart">Update cart</button> --}}
                             </div>
-                            </form>
                             <div class="discount-coupon">
                                 <h6>Discount Codes</h6>
                                 <form action="#" class="coupon-form">
@@ -103,8 +100,8 @@
                         <div class="col-lg-4 offset-lg-4">
                             <div class="proceed-checkout">
                                 <ul>
-                                    <li class="subtotal">Subtotal <span>35JD</span></li>
-                                    <li class="cart-total">Total <span>35JD</span></li>
+                                    <li class="subtotal">Subtotal <span> {{ Cart::subtotal() }} JD</span></li>
+                                    <li class="cart-total">Total <span> {{ Cart::total() }} JD</span></li>
                                 </ul>
                                 <a href="{{ route('checkout') }}" class="proceed-btn">PROCEED TO CHECK OUT</a>
                             </div>
@@ -124,7 +121,8 @@
             totalElement.textContent = total;
             document.getElementById('cartUPdate').style.display = "block";
         }
-                function incrementQuantity(inputId, price) {
+
+        function incrementQuantity(inputId, price) {
             var result = document.getElementById(inputId);
             var quantity = parseInt(result.value, 10);
             if (!isNaN(quantity)) {
@@ -132,7 +130,7 @@
                 var id = inputId.substring(8);
                 updateTotal(id, price);
             }
-            document.getElementById('cartUPdate').style.display="block";
+            document.getElementById('cartUPdate').style.display = "block";
         }
 
         function decrementQuantity(inputId, price) {
@@ -143,7 +141,7 @@
                 var id = inputId.substring(8);
                 updateTotal(id, price);
             }
-            document.getElementById('cartUPdate').style.display="block";
+            document.getElementById('cartUPdate').style.display = "block";
         }
     </script>
 

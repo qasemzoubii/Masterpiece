@@ -54,7 +54,8 @@
 
 
                             <td style="width: 230px;">
-                                <div id="carouselExampleControls" class="carousel slide mx-auto carousel-fade" data-ride="carousel" style="height: 160px;width:220px; overflow:hidden;">
+                                <div id="carouselExampleControls" class="carousel slide mx-auto carousel-fade"
+                                    data-ride="carousel" style="height: 160px;width:220px; overflow:hidden;">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
                                             <img class="d-block w-100" src="{{ $product->image }}" alt="First slide">
@@ -99,14 +100,19 @@
                             <td>{{ $product->price }}</td>
                             <td>
                                 <br>
-                                <form action="{{ route('product.destroy', $product->id) }}" method="post">
+
+
+                                <form id="deleteForm{{ $product->id }}"
+                                    action="{{ route('product.destroy', $product->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger m-1 deleteBtn w-50"><i
-                                            class="ti ti-trash"></i>Delete</button>
                                 </form>
+
+                                <a class="btn btn-outline-danger m-1 deleteBtn w-60" href="#"
+                                    onclick="confirmAndSubmit({{ $product->id }})">Delete</a>
+
                                 <a href="{{ route('product.edit', $product->id) }}"><button type="button"
-                                        class="btn btn-outline-success m-1 w-50"><i
+                                        class="btn btn-outline-success m-1 w-65"><i
                                             class="ti ti-pencil"></i>Edit</button></a>
                             </td>
                         </tr>
@@ -117,7 +123,7 @@
         </div>
     </div>
     </div>
-    <script>
+    {{-- <script>
         let deleteBtn = document.getElementsByClassName('deleteBtn');
         for (let i = 0; i < deleteBtn.length; i++) {
             deleteBtn[i].addEventListener('click', function() {
@@ -125,8 +131,7 @@
                 customModal.style.display = 'block'; // Show the modal
             });
         }
-    </script>
+    </script> --}}
     </div>
     </div>
 @endsection
-

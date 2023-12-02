@@ -19,20 +19,16 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                {{-- <th scope="col">ID</th> --}}
                                 <th scope="col">Name</th>
                                 <th scope="col">Image</th>
-                                {{-- <th scope="col">Description</th> --}}
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($categories as $category)
                             <tr>
-                                {{-- <th scope="row">{{ $category->id }}</th> --}}
                                 <td>{{ $category->name }}</td>                                
                                 <td><img src="{{ $category->image }}" alt="Present Perfect" class="images"></td>
-                                {{-- <td>{{ $category->description }}</td> --}}
                                 <td>
                                     <br>
                                 <form action="{{ route('category.destroy',$category->id)}}" method="post">

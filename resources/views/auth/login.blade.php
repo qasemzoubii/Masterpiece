@@ -1,7 +1,7 @@
 @extends('Layouts.master')
 @section('title', 'Login')
 @section('Login')
-class="active"
+    class="active"
 @endsection
 
 
@@ -67,6 +67,13 @@ class="active"
                         </form>
                         <div class="switch-login">
                             <a href="{{ route('register') }}" class="or-login">Or Create An Account</a>
+                            <br>
+                            <br>
+                            <div class="group-input">
+                                <a href="{{ route('google-auth') }}" class="site-btn google-btn">
+                                    <i class="fab fa-google"></i> Login with Google
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
