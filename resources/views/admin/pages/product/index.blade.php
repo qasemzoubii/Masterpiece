@@ -54,7 +54,7 @@
 
 
                             <td style="width: 230px;">
-                                <div id="carouselExampleControls" class="carousel slide mx-auto carousel-fade"
+                                <div id="carouselExampleControls{{ $product->id }}" class="carousel slide mx-auto carousel-fade"
                                     data-ride="carousel" style="height: 160px;width:220px; overflow:hidden;">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
@@ -72,12 +72,12 @@
                                             @endif
                                         @endfor
                                     </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                                    <a class="carousel-control-prev" href="#carouselExampleControls{{ $product->id }}" role="button"
                                         data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Previous</span>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                                    <a class="carousel-control-next" href="#carouselExampleControls{{ $product->id }}" role="button"
                                         data-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span>

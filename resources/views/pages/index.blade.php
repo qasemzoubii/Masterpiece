@@ -142,7 +142,7 @@
     <!-- Deal Of The Week Section Begin-->
     <section class="deal-of-week set-bg spad" style="background-color: #f4f2e6">
         <div class="row container">
-            <div class="col-lg-8 text-center">
+            <div class="col-lg-8 text-center mt-5 px-5 mb-5">
                 <div class="section-title">
                     <h2>{{ $productHero->name }}</h2>
                     <p>
