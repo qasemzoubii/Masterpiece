@@ -32,7 +32,7 @@
             <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a class="navbar-brand" href="{{ route('index') }}"><img
+                    <a class="navbar-brand" href="{{ route('category.index') }}"><img
                             src="{{ asset('../assets/images/logos/logo.png') }}" style="width: 110px;"
                             alt=""></a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -42,30 +42,23 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                     <ul id="sidebarnav">
-                        <li class="nav-small-cap">
+                        {{-- <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Home</span>
-                        </li>
-                        <li class="sidebar-item">
+                        </li> --}}
+                        {{-- <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-layout-dashboard"></i>
                                 </span>
                                 <span class="hide-menu">Dashboard</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">PAGES</span>
                         </li>
-                        <!-- <li class="sidebar-item">
-              <a class="sidebar-link" href="./menu.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-cup"></i>
-                </span>
-                <span class="hide-menu">Menu</span>
-              </a>
-            </li> -->
+
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('category.index') }}" aria-expanded="false">
                                 <span>
@@ -107,35 +100,23 @@
                                 <span class="hide-menu">Oreders</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        {{-- <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('discount.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-percentage"></i>
                                 </span>
                                 <span class="hide-menu">Discount</span>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-login"></i>
+                                    {{-- <i class="ti ti-login"></i> --}}
                                 </span>
-                                <span class="hide-menu">Login</span>
+                                {{-- <span class="hide-menu">Login</span> --}}
                             </a>
                         </li>
-                        <!-- <li class="sidebar-item">
-                <a
-                  class="sidebar-link"
-                  href="./authentication-register.html"
-                  aria-expanded="false"
-                >
-                  <span>
-                    <i class="ti ti-user-plus"></i>
-                  </span>
-                  <span class="hide-menu">Register</span>
-                </a>
-              </li> -->
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -158,8 +139,8 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                                <i class="ti ti-bell-ringing"></i>
-                                <div class="notification bg-danger rounded-circle"></div>
+                                {{-- <i class="ti ti-bell-ringing"></i> --}}
+                                {{-- <div class="notification bg-danger rounded-circle"></div> --}}
                             </a>
                         </li>
                     </ul>
@@ -168,13 +149,14 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="../assets/images/profile/me.jpg" alt="" width="35"
+                                    <img src="{{ url('admin/adminIMG.jpg') }}" alt="" width="35"
                                         height="35" class="rounded-circle" />
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profilee" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="{{ route('adminProfile') }}"
+                                            class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">My Profile</p>
                                         </a>

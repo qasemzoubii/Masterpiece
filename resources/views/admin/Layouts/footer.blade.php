@@ -39,12 +39,26 @@
             window.addEventListener('DOMContentLoaded', (event) => {
                 Swal.fire(
                     'error',
-                    `{{ session('error') }}`,
+                    '{{ session('error') }}',
                     'error'
                 );
             });
         </script>
     @endif
+
+    @if ($errors->any())
+    <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                Swal.fire(
+                    'error',
+                    `@foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach`,
+                    'error'
+                );
+            });
+        </script>
+@endif
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </script>
@@ -67,5 +81,6 @@
                 }
             });
         }
+
         
         </script>

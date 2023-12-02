@@ -128,6 +128,6 @@ class CategoryController extends Controller
             Category::destroy($id);
             return redirect()->route('category.index')->with('success', 'Category deleted successfully');
         }
-        return back()->withErrors(['msg', 'This category has products']);
+        return back()->with('error', 'You Cant Deleted This Category Because It Have Products');
     }
 }

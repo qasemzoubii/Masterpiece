@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials) && auth()->user()->role == "admin") {
             // Authentication passed, and user has 'role' set to true
-            return redirect()->intended('/index');
+            return redirect()->intended('/category');
         }
 
         // Authentication failed or user doesn't have the required role

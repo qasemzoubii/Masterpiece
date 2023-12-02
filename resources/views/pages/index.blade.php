@@ -20,7 +20,7 @@
                             <h5>Yesterday's the past, tomorrow's the future but today is a
                                 gift. That's why it's called the present.</h5>
                             </p>
-                            <a href="./shop.html" class="primary-btn">Shop Now</a>
+                            <a href="{{ route('shop', 1) }}" class="primary-btn">Shop Now</a>
                         </div>
                     </div>
                     <!-- <div class="off-card">
@@ -38,7 +38,7 @@
                             <h5> Fully prepared, ready-to-deliver gift boxes, or completely customized!
                                 We've got something for any occasion!</h5>
                             </p>
-                            <a href="./cate-bulid.html" class="primary-btn">Build Now</a>
+                            <a href="{{ route('shop', 1) }}" class="primary-btn">Build Now</a>
                         </div>
                     </div>
                     <!-- <div class="off-card">
@@ -78,7 +78,7 @@
     </div>
     <!-- Banner Section End -->
     <center>
-        <a href="shop.html" class="primary-btn">See More</a>
+        <a href="{{ route('shop', 1) }}" class="primary-btn">See More</a>
     </center>
     <!-- Women Banner Section Begin -->
     <section class="women-banner spad">
@@ -102,7 +102,7 @@
                         @foreach ($products as $product)
                             <div class="product-item">
                                 <div class="pi-pic">
-                                    <img src="{{ $product->image }}" alt="" />
+                                    <img style="max-height: 300px" src="{{ $product->image }}" alt="" />
                                     <!-- <div class="sale">Sale</div> -->
                                     <div class="icon">
                                         {{-- <i class="icon_heart_alt"></i> --}}
@@ -144,22 +144,16 @@
         <div class="row container">
             <div class="col-lg-8 text-center">
                 <div class="section-title">
-                    <h2>Deal Of The Week</h2>
+                    <h2>{{ $productHero->name }}</h2>
                     <p>
-                        Elevate your style with our Classic Chronograph Men's Watch, now
-                        available
-                        <br />
-                        at an irresistible sale price! This sophisticated timepiece
-                        combines timeless design <br />
-                        with modern functionality, making it a must-have accessory for any
-                        discerning gentleman.
+                        {{ $productHero->description }}
                     </p>
                     <div class="product-price">
-                        $35.00
+                        {{ $productHero->price }} JD
                         <span>/ Watch</span>
                     </div>
                 </div>
-                <div class="countdown-timer" id="countdown">
+                {{-- <div class="countdown-timer" id="countdown">
                     <div class="cd-item">
                         <span>56</span>
                         <p>Days</p>
@@ -176,11 +170,11 @@
                         <span>52</span>
                         <p>Secs</p>
                     </div>
-                </div>
-                <a href="#" class="primary-btn">Shop Now</a>
+                </div> --}}
+                <a href="{{ route('products', $productHero->id) }}" class="primary-btn">Shop Now</a>
             </div>
             <div class="col-lg-4">
-                <img src="img/watch.png" alt="" />
+                <img src="{{ url($productHero->image) }}" alt="" />
             </div>
         </div>
     </section>
@@ -191,26 +185,23 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8">
-                    <!-- <div class="filter-control">
-                      <ul>
-                        <li class="active">Clothings</li>
-                        <li>Accessories</li>
-                        <li>perfume</li>
-                      </ul>
-                    </div> -->
+
                     <div class="product-slider owl-carousel">
+                        @foreach ($randomProducts as $item)
+                            
+                        
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="img/products/301_grande.jpg" alt="" />
+                                <img style="max-height: 300px" src="{{ $item->image }}" alt="" />
                                 <!-- <div class="sale">Sale</div> -->
                                 <div class="icon">
                                     {{-- <i class="icon_heart_alt"></i> --}}
                                 </div>
                                 <ul>
                                     <li class="w-icon active">
-                                        <!-- <a href="#"><i class="icon_bag_alt"></i></a> -->
+                                        <a href="{{ route('store.add-to-cart' , $item->id) }}"><i class="icon_bag_alt"></i></a>
                                     </li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                    <li class="quick-view"><a href="{{ route('products' , $item->id) }}"> View Product</a></li>
                                     <li class="w-icon">
                                         <!-- <a href="#"><i class="fa fa-random"></i></a> -->
                                     </li>
@@ -219,86 +210,16 @@
                             <div class="pi-text">
                                 <!-- <div class="catagory-name">Coat</div> -->
                                 <a href="#">
-                                    <h5>Hart of Roses and Ferrero Rocher</h5>
+                                    <h5>{{ $item->name }}</h5>
                                 </a>
                                 <div class="product-price">
-                                    35JD
+                                    {{ $item->price }} JD
                                     <!-- <span>$35.00</span> -->
+
                                 </div>
                             </div>
                         </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img/products/l4_grande.jpg" alt="" />
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active">
-                                        <!-- <a href="#"><i class="icon_bag_alt"></i></a> -->
-                                    </li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon">
-                                        <!-- <a href="#"><i class="fa fa-random"></i></a> -->
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <!-- <div class="catagory-name">Shoes</div> -->
-                                <a href="#">
-                                    <h5>Chocolate box</h5>
-                                </a>
-                                <div class="product-price">25JD</div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img/products/l1_grande.jpg" alt="" />
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active">
-                                        <!-- <a href="#"><i class="icon_bag_alt"></i></a> -->
-                                    </li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon">
-                                        <!-- <a href="#"><i class="fa fa-random"></i></a> -->
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <!-- <div class="catagory-name">Towel</div> -->
-                                <a href="#">
-                                    <h5>Graduation box</h5>
-                                </a>
-                                <div class="product-price">15JD</div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img/products/20150606_5_grande.jpg" alt="" />
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active">
-                                        <!-- <a href="#"><i class="icon_bag_alt"></i></a> -->
-                                    </li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon">
-                                        <!-- <a href="#"><i class="fa fa-random"></i></a> -->
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <!-- <div class="catagory-name">Towel</div> -->
-                                <a href="#">
-                                    <h5>Jawaher® chocolates box</h5>
-                                </a>
-                                <div class="product-price">30JD</div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1">

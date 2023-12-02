@@ -11,7 +11,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderitemController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\GoogleAuthController;
+
 
 use App\Http\Livewire\SearchComponent;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +37,8 @@ Route::get('/shop/{category_id}', [ProductController::class, 'shop'])->name('sho
 // Route::get('/shop/filterByPrice/{category_id?}', [ProductController::class, 'shop'])->name('shop.filterByPrice');
 Route::get('/search/{category_id?}', [ProductController::class, 'search'])->name('search');
 
+Route::post('/PresentPerfect/Review', [ReviewController::class, 'storeReview'])->name('review');
+
 
 
 Route::get('/viewProduct/{product_id}', [ProductController::class, 'product'])->name('products');
@@ -53,9 +57,12 @@ Route::get('qty-decrement/{rowId}', [CartController::class, 'qtyDecrement'])->na
 Route::get('remove-product/{rowId}', [CartController::class, 'removeProduct'])->name('remove-product');
 
 
-Route::get('profilee', function () {
-    return view('admin.pages.profile');
-});
+
+Route::get('adminProfile', [UserDashController::class, 'adminProfile'])->name('adminProfile');
+Route::post('adminProfileEdit', [UserDashController::class, 'adminProfileEdit'])->name('adminProfileEdit');
+Route::post('adminPasswordUpdate', [UserDashController::class, 'adminPasswordUpdate'])->name('adminPasswordUpdate');
+
+
 
 Route::get('/dashboard_login', [DashboardController::class, 'login'])->name('dashboard_login');
 Route::post('/loginAdmin', [DashboardController::class, 'loginAdmin'])->name('loginAdmin');

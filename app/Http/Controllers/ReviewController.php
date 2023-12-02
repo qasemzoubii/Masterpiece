@@ -82,4 +82,13 @@ class ReviewController extends Controller
     {
         //
     }
+
+    public function storeReview(Request $request)
+    {
+        $review = $request->all();
+        $review['user_id'] = auth()->user()->id;
+
+        review::create($review);
+        return redirect()->back()->with('success', 'Thanks for your comment');
+    }
 }

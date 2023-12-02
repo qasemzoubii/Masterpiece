@@ -99,14 +99,14 @@
                                                 Low Price
                                         </select>
                                     </form>
-                                    <select class="p-show">
+                                    {{-- <select class="p-show">
                                         <option value="">Show:</option>
-                                    </select>
+                                    </select> --}}
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-md-5 text-right">
+                            {{-- <div class="col-lg-5 col-md-5 text-right">
                                 <p>Show 01- 09 Of 36 Product</p>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="product-list">
@@ -131,8 +131,8 @@
                                                         href="{{ route('store.add-to-cart', $product->id) }}"><i
                                                             class="icon_bag_alt"></i></a>
                                                 </li>
-                                                <li class="quick-view"><a href="{{ route('products', $product->id) }}">+
-                                                        Quick View</a></li>
+                                                <li class="quick-view"><a href="{{ route('products', $product->id) }}">
+                                                        View Product</a></li>
                                                 <li class="w-icon">
                                                     {{-- <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>  --}}
 
