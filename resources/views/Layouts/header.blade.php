@@ -112,7 +112,7 @@
                                     <h5>{{ Cart::total() }} JD</h5>
                                 </div>
                                 <div class="select-button">
-                                    <a href="{{ route('cart') }}" class="primary-btn view-card">VIEW CARD</a>
+                                    <a href="{{ route('cart') }}" class="primary-btn view-card">VIEW CART</a>
                                     <a href="{{ route('checkout') }}" class="primary-btn checkout-btn">CHECK OUT</a>
                                 </div>
                             </div>

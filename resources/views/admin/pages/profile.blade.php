@@ -17,8 +17,8 @@
                                 <div class="col">
                                     <h2 class="page-title">Profile</h2>
                                     <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
-                                        <li class="breadcrumb-item active">Profile</li>
+                                        {{-- <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li> --}}
+                                        <li class="breadcrumb-item active">Admin Profile</li>
                                     </ul>
                                 </div>
                             </div>
@@ -30,7 +30,8 @@
                                     <div class="row align-items-center">
                                         <div class="col-auto profile-image">
                                             <a href="#">
-                                                <img class="rounded-circle" alt="User Image" src="{{ url($admin->image) }}"
+                                                {{-- src="{{ is_string($admin->image) ? $admin->image : asset($admin->image) }}" --}}
+                                                <img class="rounded-circle" alt="User Image" src="{{ is_string($admin->image) ? $admin->image : asset($admin->image) }}"
                                                     style="height: 100px; width: 100px;">
                                             </a>
                                         </div>
